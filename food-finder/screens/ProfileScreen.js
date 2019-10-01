@@ -1,6 +1,7 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import React, { Component } from 'react';
+import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
+
 
 export default function ProfileScreen() {
   return (

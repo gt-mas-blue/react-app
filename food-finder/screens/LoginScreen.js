@@ -34,10 +34,11 @@ export default class LoginScreen extends React.Component {
   }
 
   submitLoginCredentials() {
-    const { email, password } = this.state;
-    this.setState({
-      showLoading: true
-    });
+    this.props.navigation.navigate('App')
+    // const { email, password } = this.state;
+    // this.setState({
+    //   showLoading: true
+    // });
     //insert the login reqeust here
   }
   
