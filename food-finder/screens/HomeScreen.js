@@ -55,7 +55,7 @@ export default function HomeScreen() {
 
       <View style={styles.tabBarInfoContainer}>
         <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
+          This is a tab bar. You can edit it in: sdfs
         </Text>
 
         <View

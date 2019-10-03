@@ -41,7 +41,7 @@ export default class LoginScreen extends React.Component {
     // });
     //insert the login reqeust here
   }
-  
+
   render() {
     const { email, password, email_valid, error_msg, showLoading } = this.state;
 
@@ -152,7 +152,7 @@ export default class LoginScreen extends React.Component {
     </View>
 
   )}
-          }   
+          }
 
   LoginScreen.navigationOptions = {
     title: 'Login Page',
