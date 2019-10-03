@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import FeedScreen from '../screens/FeedScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -34,6 +35,22 @@ HomeStack.navigationOptions = {
 };
 
 HomeStack.path = '';
+
+const FeedStack = createStackNavigator(
+  {
+    Feed: FeedScreen,
+  },
+  config
+);
+
+FeedStack.navigationOptions = {
+  tabBarLabel: 'Feed',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-refresh' : 'md-refresh'} />
+  ),
+};
+
+FeedStack.path = '';
 
 const ProfileStack = createStackNavigator(
   {
@@ -71,6 +88,7 @@ const tabNavigator = createBottomTabNavigator({
   HomeStack,
   ProfileStack,
   SettingsStack,
+  FeedStack
 });
 
 tabNavigator.path = '';
