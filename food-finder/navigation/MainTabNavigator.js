@@ -15,42 +15,23 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Feed: FeedScreen,
   },
   config
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Feed',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name={Platform.OS === 'ios' ? 'ios-refresh' : 'md-refresh'}
     />
   ),
 };
 
 HomeStack.path = '';
 
-const FeedStack = createStackNavigator(
-  {
-    Feed: FeedScreen,
-  },
-  config
-);
-
-FeedStack.navigationOptions = {
-  tabBarLabel: 'Feed',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-refresh' : 'md-refresh'} />
-  ),
-};
-
-FeedStack.path = '';
 
 const ProfileStack = createStackNavigator(
   {
@@ -88,7 +69,6 @@ const tabNavigator = createBottomTabNavigator({
   HomeStack,
   ProfileStack,
   SettingsStack,
-  FeedStack
 });
 
 tabNavigator.path = '';
