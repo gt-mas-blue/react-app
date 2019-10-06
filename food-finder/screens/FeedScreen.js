@@ -42,7 +42,8 @@ export default function FeedScreen() {
 
       <FlatList
         data={deals}
-        renderItem={itemData => <DealItem title={itemData.item.value} />}
+        renderItem={itemData => <DealItem desc={itemData.item.value} />}
+
       />
     </View>
   );

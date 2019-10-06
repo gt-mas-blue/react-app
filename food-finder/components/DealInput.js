@@ -11,6 +11,9 @@ import {
 const DealInput = props => {
 
   const [enteredDeal, setEnteredDeal] = useState('');
+  const title = "Moe Mondays";
+  const restaurant = "Moes";
+  const price = "$$";
 
 
   const dealInputHandler = (enteredText) => {
@@ -18,6 +21,7 @@ const DealInput = props => {
   };
 
   const addDealHandler = () => {
+
     props.onAddDeal(enteredDeal);
     setEnteredDeal('');
   };

@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 
 
 const DealItem = props => {
+  console.log(props.title);
   return (
 
     <View style={styles.listItem}>
@@ -13,7 +14,7 @@ const DealItem = props => {
       </View>
       <Text>Description:</Text>
       <View style={{backgroundColor: 'gray'}}>
-        <Text>{props.title}</Text>
+        <Text>{props.desc}</Text>
       </View>
       <Text style={{textAlign: 'right'}}>Posted by Nish</Text>
     </View>
