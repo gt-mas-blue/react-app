@@ -9,7 +9,9 @@ import {
 
 
 const DealInput = props => {
+
   const [enteredDeal, setEnteredDeal] = useState('');
+
 
   const dealInputHandler = (enteredText) => {
     setEnteredDeal(enteredText);
@@ -30,15 +32,31 @@ const DealInput = props => {
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder="Add Deal"
+          placeholder="Title"
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Restaurant"
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Price"
+          style={styles.input}
+        />
+
+        <TextInput
+          placeholder="Description/Deal"
           style={styles.input}
           onChangeText = {dealInputHandler}
           value={enteredDeal}
-          />
+        />
+
+
         <View style={styles.buttons}>
           <Button title="ADD" onPress={addDealHandler} />
           <Button title="CANCEL" color="red" onPress={cancelButtonHandler} />
         </View>
+
       </View>
     </Modal>
   );
@@ -53,7 +71,7 @@ const styles = StyleSheet.create({
   input: {
     width: '80%',
     borderBottomColor: 'black',
-    borderBottomWidth: 3,
+    borderBottomWidth: 1,
     padding: 10
   },
   buttons: {
@@ -62,6 +80,5 @@ const styles = StyleSheet.create({
 
   }
 });
-
 
 export default DealInput;
