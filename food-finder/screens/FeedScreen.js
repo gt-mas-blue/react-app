@@ -1,40 +1,48 @@
 import React, { useState } from 'react';
-import {StyleSheet, Text, View, ScrollView, TextInput, Button, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TextInput,
+  Button,
+  FlatList
+} from 'react-native';
+import DealItem from '../components/DealItem';
+import DealInput from '../components/DealInput';
+
+
 
 export default function FeedScreen() {
-  const [enteredDeal, setEnteredDeal] = useState('');
   const [deals, setDeals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
 
-  const dealInputHandler = (enteredText) => {
-    setEnteredDeal(enteredText);
-  };
-
-  const addDealHandler = () => {
+  const addDealHandler = (dealTitle) => {
     setDeals(currentDeals => [
       ...currentDeals,
-      { key: Math.random().toString(), value: enteredDeal }
+      { key: Math.random().toString(), value: dealTitle }
     ]);
+    setIsAddMode(false);
+  };
+
+  const cancelButtonHandler = () => {
+    setIsAddMode(false);
   };
 
   return (
     <View style={styles.screen}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Add Deal"
-          style={styles.input}
-          onChangeText = {dealInputHandler}
-          value={enteredDeal}
-          />
-        <Button title="ADD" onPress={addDealHandler} />
-      </View>
+      <Button title="New Post" onPress={() => setIsAddMode(true)} />
+
+
+      <DealInput
+        visible={isAddMode}
+        onAddDeal={addDealHandler}
+        onCancel={cancelButtonHandler}
+        />
+
       <FlatList
-      // keyExtractor function
         data={deals}
-        renderItem={itemData => (
-          <View style={styles.listItem}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
+        renderItem={itemData => <DealItem title={itemData.item.value} />}
       />
     </View>
   );
@@ -46,23 +54,6 @@ FeedScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 50
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  input: {
-    width: '80%',
-    borderBottomColor: 'black',
-    borderBottomWidth: 3,
-    padding: 10
-  },
-  listItem: {
     padding: 10,
-    marginVertical: 10,
-    borderColor: "black",
-    borderWidth: 1,
-  }
+  },
 });
