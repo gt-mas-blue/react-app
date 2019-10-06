@@ -16,10 +16,10 @@ export default class ProfileScreen extends Component {
               <Text style={styles.description}>I am a Georgia Tech student and love computer science. I am a mobile app developer and I love cooking cheap, healthy food in my free time. </Text>
               
               <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Posts</Text>  
+                <Text style={styles.buttonText}>Posts</Text>  
               </TouchableOpacity>              
               <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Photos</Text> 
+                <Text style={styles.buttonText}>Photos</Text> 
               </TouchableOpacity>
             </View>
         </View>
@@ -58,11 +58,11 @@ const styles = StyleSheet.create({
   },
   bodyContent: {
     alignItems: 'center',
-    padding:20,
+    padding:10,
   },
   info:{
     fontSize:16,
-    color: "#00BFFF",
+    color: "#FF5858",
     marginTop:10
   },
   description:{
@@ -80,7 +80,10 @@ const styles = StyleSheet.create({
     marginBottom:20,
     width:250,
     borderRadius:30,
-    backgroundColor: "#00BFFF",
+    backgroundColor: "#EB0B0B",
   },
+  buttonText: {
+    color:"#FFFFFF"
+  }
 });
  
