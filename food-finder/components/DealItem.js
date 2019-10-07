@@ -7,10 +7,10 @@ const DealItem = props => {
   return (
 
     <View style={styles.listItem}>
-      <Text style={styles.Title}>Title</Text>
+      <Text style={styles.Title}>Moe Mondays</Text>
       <View style={styles.Restaurant}>
-        <Text>Restaurant</Text>
-        <Text>Price</Text>
+        <Text>Moes</Text>
+        <Text>2/5</Text>
       </View>
       <View>
         <Text>{props.desc}</Text>
