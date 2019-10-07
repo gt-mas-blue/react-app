@@ -12,9 +12,9 @@ const DealItem = props => {
         <Text>Restaurant</Text>
         <Text>Price</Text>
       </View>
-      <Text>Description:</Text>
-      <View style={{backgroundColor: 'gray'}}>
+      <View>
         <Text>{props.desc}</Text>
+        <Text style={{color: 'blue'}}>Like</Text>
       </View>
       <Text style={{textAlign: 'right'}}>Posted by Nish</Text>
     </View>
@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
   listItem: {
     padding: 10,
     marginVertical: 10,
-    borderColor: 'black',
-    borderWidth: 1,
+
   },
   Title: {
-    fontSize: 40
+    fontSize: 40,
   },
+
   Restaurant: {
     flexDirection: 'row',
     justifyContent: 'space-between',
