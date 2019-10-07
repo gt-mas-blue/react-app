@@ -12,11 +12,11 @@ export default class SettingsScreen extends React.Component{
    */
   render() {
     return(
-      <View></View>
+      <ExpoConfigView></ExpoConfigView>
     )
   };
 }
 
 SettingsScreen.navigationOptions = {
-  title: 'app.json',
+  title: 'Settings',
 };
