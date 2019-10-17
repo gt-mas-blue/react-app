@@ -36,31 +36,31 @@ export default class LoginScreen extends React.Component {
 
   submitLoginCredentials() {
     const { email, password } = this.state;
-    this.setState({
-      showLoading: true
-    });
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", Constants.SERVER_URL + "/api/users/login");
-    xhr.setRequestHeader("Content-Type", "application/json")
-    var self = this
-    xhr.onreadystatechange = function() {
-      if (this.readyState == XMLHttpRequest.DONE) {
-        self.setState({
-          showLoading: false
-        });
-        var json = JSON.parse(this.response)
-        if(json.success && json.success == true) {
-          AsyncStorage.setItem('credentials', JSON.stringify({email: email, password: password}));
-          self.props.navigation.navigate('App');
-        } else {
-          self.setState({
-            error_msg: "Login error"
-          })
-        }
-      }
-    }
-    // agra.meha@gmail.com password2
-    xhr.send(JSON.stringify({"email": email, "password": password}))
+    // this.setState({
+    //   showLoading: true
+    // });
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("POST", "https://foodfinderapi.herokuapp.com/UserData" + "");
+    // xhr.setRequestHeader("Content-Type", "application/json")
+    // var self = this
+    // xhr.onreadystatechange = function() {
+    //   if (this.readyState == XMLHttpRequest.DONE) {
+    //     self.setState({
+    //       showLoading: false
+    //     });
+    //     var json = JSON.parse(this.response)
+    //     if(json.success && json.success == true) {
+    //       AsyncStorage.setItem('credentials', JSON.stringify({email: email, password: password}));
+    //       self.props.navigation.navigate('App');
+    //     } else {
+    //       self.setState({
+    //         error_msg: "Login error"
+    //       })
+    //     }
+    //   }
+    // }
+    // xhr.send(JSON.stringify({"email": email, "password": password}))
+    self.props.navigation.navigate('App');
   }
 
   render() {
