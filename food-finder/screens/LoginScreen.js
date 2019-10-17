@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import { AsyncStorage } from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
+import axios from 'axios';
 
 export default class LoginScreen extends React.Component {
   constructor(props) {
@@ -34,12 +35,32 @@ export default class LoginScreen extends React.Component {
   }
 
   submitLoginCredentials() {
-    this.props.navigation.navigate('App')
-    // const { email, password } = this.state;
-    // this.setState({
-    //   showLoading: true
-    // });
-    //insert the login reqeust here
+    const { email, password } = this.state;
+    this.setState({
+      showLoading: true
+    });
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", Constants.SERVER_URL + "/api/users/login");
+    xhr.setRequestHeader("Content-Type", "application/json")
+    var self = this
+    xhr.onreadystatechange = function() {
+      if (this.readyState == XMLHttpRequest.DONE) {
+        self.setState({
+          showLoading: false
+        });
+        var json = JSON.parse(this.response)
+        if(json.success && json.success == true) {
+          AsyncStorage.setItem('credentials', JSON.stringify({email: email, password: password}));
+          self.props.navigation.navigate('App');
+        } else {
+          self.setState({
+            error_msg: "Login error"
+          })
+        }
+      }
+    }
+    // agra.meha@gmail.com password2
+    xhr.send(JSON.stringify({"email": email, "password": password}))
   }
 
   render() {
