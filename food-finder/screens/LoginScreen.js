@@ -33,7 +33,7 @@ export default class LoginScreen extends React.Component {
 
     return re.test(email);
   }
-
+//https://foodfinderapi.herokuapp.com/UserData/username/password
   submitLoginCredentials() {
     const { email, password } = this.state;
     // this.setState({
@@ -60,7 +60,7 @@ export default class LoginScreen extends React.Component {
     //   }
     // }
     // xhr.send(JSON.stringify({"email": email, "password": password}))
-    self.props.navigation.navigate('App');
+    this.props.navigation.navigate('App');
   }
 
   render() {
