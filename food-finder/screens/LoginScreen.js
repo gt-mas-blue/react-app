@@ -43,7 +43,7 @@ export default class LoginScreen extends React.Component {
         showLoading: false
       });
       if(res.data) {
-        self.props.navigation.navigation.navigate('App');
+        self.props.navigation.navigate('App');
       } else {
         self.setState({
           error_msg: "Login error"
