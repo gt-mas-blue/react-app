@@ -39,6 +39,9 @@ export default class LoginScreen extends React.Component {
     });
     let self = this;
     axios.get("https://foodfinderapi.herokuapp.com/UserData/" + username + "/" + password).then(res => {
+      this.setState({
+        showLoading: false
+      });
       if(res.data) {
         self.props.navigation.navigation.navigate('App');
       } else {
