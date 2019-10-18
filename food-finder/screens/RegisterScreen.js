@@ -6,7 +6,7 @@ export default class RegisterScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      username: '',
       email: '',
       email_valid: true,
       password: '',
@@ -21,7 +21,7 @@ export default class RegisterScreen extends React.Component {
     }
 
     submitLoginCredentials() {
-      const { name, email, password } = this.state;
+      const { username, email, password } = this.state;
       this.setState({
         showLoading: true
       });
@@ -29,7 +29,7 @@ export default class RegisterScreen extends React.Component {
     }
   
   render() {
-    const { name, email, password, email_valid, error_msg, showLoading } = this.state;
+    const { username, email, password, email_valid, error_msg, showLoading } = this.state;
 
   return (
     <View style={styles.container}>
@@ -49,18 +49,18 @@ export default class RegisterScreen extends React.Component {
             <Input
               leftIcon={
                 <Icon
-                  name="user-o"
+                  username="user-o"
                   type="font-awesome"
                   color="rgba(171, 189, 219, 1)"
                   size={25}
                 />
               }
               containerStyle={{ marginVertical: 10 }}
-              onChangeText={name => this.setState({ name })}
-              value={name}
+              onChangeText={username => this.setState({ username })}
+              value={username}
               inputStyle={{ marginLeft: 10, color: 'black' }}
               keyboardAppearance="light"
-              placeholder="Name"
+              placeholder="Username"
               autoFocus={false}
               autoCapitalize="none"
               autoCorrect={false}
@@ -72,7 +72,7 @@ export default class RegisterScreen extends React.Component {
             <Input
               leftIcon={
                 <Icon
-                  name="user-o"
+                  username="user-o"
                   type="font-awesome"
                   color="rgba(171, 189, 219, 1)"
                   size={25}
@@ -104,7 +104,7 @@ export default class RegisterScreen extends React.Component {
             <Input
               leftIcon={
                 <Icon
-                  name="lock"
+                  username="lock"
                   type="font-awesome"
                   color="rgba(171, 189, 219, 1)"
                   size={25}
@@ -133,7 +133,7 @@ export default class RegisterScreen extends React.Component {
             onPress={this.submitLoginCredentials.bind(this)}
             loading={showLoading}
             loadingProps={{ size: 'small', color: 'black' }}
-            disabled={name.length == 0 || !email_valid || password.length < 8}
+            disabled={username.length == 0 || !email_valid || password.length < 8}
             buttonStyle={{
               height: 50,
               width: 250,
