@@ -4,12 +4,13 @@ import { AsyncStorage } from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
 import axios from 'axios';
 
+
 export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      email_valid: true,
+      username: '',
+      username_valid: true,
       password: '',
       error_msg: '',
       showLoading: false,
@@ -21,50 +22,35 @@ export default class LoginScreen extends React.Component {
       if (value) {
         let credentials = JSON.parse(value);
         this.setState({
-          email: credentials.email,
+          username: credentials.username,
           password: credentials.password
         });
       }
     });
   }
 
-  validateEmail(email) {
-    var re = /^(([^<>()[\]\\,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    return re.test(email);
+  validateUsername(username) {
+    return true;
   }
-//https://foodfinderapi.herokuapp.com/UserData/username/password
   submitLoginCredentials() {
-    const { email, password } = this.state;
-    // this.setState({
-    //   showLoading: true
-    // });
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("POST", "https://foodfinderapi.herokuapp.com/UserData" + "");
-    // xhr.setRequestHeader("Content-Type", "application/json")
-    // var self = this
-    // xhr.onreadystatechange = function() {
-    //   if (this.readyState == XMLHttpRequest.DONE) {
-    //     self.setState({
-    //       showLoading: false
-    //     });
-    //     var json = JSON.parse(this.response)
-    //     if(json.success && json.success == true) {
-    //       AsyncStorage.setItem('credentials', JSON.stringify({email: email, password: password}));
-    //       self.props.navigation.navigate('App');
-    //     } else {
-    //       self.setState({
-    //         error_msg: "Login error"
-    //       })
-    //     }
-    //   }
-    // }
-    // xhr.send(JSON.stringify({"email": email, "password": password}))
-    this.props.navigation.navigate('App');
+    const { username, password } = this.state;
+    this.setState({
+      showLoading: true
+    });
+    let self = this;
+    axios.get("https://foodfinderapi.herokuapp.com/UserData/" + username + "/" + password).then(res => {
+      if(res.data) {
+        self.props.navigation.navigation.navigate('App');
+      } else {
+        self.setState({
+          error_msg: "Login error"
+        })
+      }
+    })
   }
 
   render() {
-    const { email, password, email_valid, error_msg, showLoading } = this.state;
+    const { username, password, username_valid, error_msg, showLoading } = this.state;
 
   return (
     <View style={styles.container}>
@@ -91,26 +77,26 @@ export default class LoginScreen extends React.Component {
                 />
               }
               containerStyle={{ marginVertical: 10 }}
-              onChangeText={email => this.setState({ email })}
-              value={email}
+              onChangeText={username => this.setState({ username })}
+              value={username}
               inputStyle={{ marginLeft: 10, color: 'black' }}
               keyboardAppearance="light"
-              placeholder="Email"
+              placeholder="Username"
               autoFocus={false}
               autoCapitalize="none"
               autoCorrect={false}
-              keyboardType="email-address"
+              keyboardType="default"
               returnKeyType="next"
-              ref={input => (this.emailInput = input)}
+              ref={input => (this.usernameInput = input)}
               onSubmitEditing={() => {
-                this.setState({ email_valid: this.validateEmail(email) });
+                this.setState({ username_valid: this.validateUsername(username) });
                 this.passwordInput.focus();
               }}
               blurOnSubmit={false}
               placeholderTextColor="black"
               errorStyle={{ textAlign: 'center', fontSize: 12 }}
               errorMessage={
-                email_valid ? null : 'Please enter a valid email address'
+                username_valid ? null : 'Please enter a valid username'
               }
             />
             <Input
@@ -145,7 +131,7 @@ export default class LoginScreen extends React.Component {
             onPress={this.submitLoginCredentials.bind(this)}
             loading={showLoading}
             loadingProps={{ size: 'small', color: 'black' }}
-            disabled={!email_valid || password.length < 8}
+            disabled={!username_valid || password.length < 8}
             buttonStyle={{
               height: 50,
               width: 250,
