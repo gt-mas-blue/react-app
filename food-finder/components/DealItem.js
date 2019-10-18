@@ -27,11 +27,13 @@ const styles = StyleSheet.create({
     width: 356,
     height: 206,
     borderColor: "#000000",
-    borderWidth: 4
+    borderWidth: 4,
+    marginTop: 7,
+    alignSelf: "center"
 
   },
   Title: {
-    fontSize: 40,
+    fontSize: 32,
   },
 
   Restaurant: {

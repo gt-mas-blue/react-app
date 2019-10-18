@@ -57,4 +57,9 @@ const styles = StyleSheet.create({
   screen: {
     padding: 10,
   },
+  materialButtonDark: {
+    width: 100,
+    height: 36,
+    alignSelf: "center"
+  }
 });

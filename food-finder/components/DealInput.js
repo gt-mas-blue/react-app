@@ -57,8 +57,8 @@ const DealInput = props => {
 
 
         <View style={styles.buttons}>
-          <Button title="ADD" onPress={addDealHandler} />
-          <Button title="CANCEL" color="red" onPress={cancelButtonHandler} />
+          <Button title="Post" onPress={addDealHandler} />
+          <Button title="Cancel" color="red" onPress={cancelButtonHandler} />
         </View>
 
       </View>
@@ -70,7 +70,9 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderColor: "#000000",
+    borderWidth: 4
   },
   input: {
     width: '80%',
