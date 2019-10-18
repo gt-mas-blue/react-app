@@ -24,8 +24,10 @@ const DealItem = props => {
 
 const styles = StyleSheet.create({
   listItem: {
-    padding: 10,
-    marginVertical: 10,
+    width: 356,
+    height: 206,
+    borderColor: "#000000",
+    borderWidth: 4
 
   },
   Title: {
