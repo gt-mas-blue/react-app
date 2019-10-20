@@ -4,7 +4,6 @@ import { AsyncStorage } from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
 import axios from 'axios';
 
-
 export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +42,9 @@ export default class LoginScreen extends React.Component {
         showLoading: false
       });
       if(res.data) {
-        self.props.navigation.navigate('App');
+        AsyncStorage.setItem('username', username).then((value) => {
+          self.props.navigation.navigate('App');
+        })
       } else {
         self.setState({
           error_msg: "Login error"
