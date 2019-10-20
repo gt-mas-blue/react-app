@@ -31,20 +31,23 @@ export default function FeedScreen() {
 
   return (
     <View style={styles.screen}>
-      <Button title="New Post" onPress={() => setIsAddMode(true)} />
 
 
       <DealInput
         visible={isAddMode}
         onAddDeal={addDealHandler}
         onCancel={cancelButtonHandler}
-        />
+      />
 
       <FlatList
-        data={deals}
-        renderItem={itemData => <DealItem desc={itemData.item.value} />}
-
+          contentContainerStyle={{ flexGrow: 1 }}
+          data={deals}
+          renderItem={itemData => <DealItem desc={itemData.item.value} />}
+          ItemSeparatorComponent={() => <Text>  </Text>}
       />
+
+      <Button title="New Post" onPress={() => setIsAddMode(true)} />
+
     </View>
   );
 }
@@ -55,6 +58,7 @@ FeedScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   screen: {
+    flex: 1,
     padding: 10,
   },
   materialButtonDark: {

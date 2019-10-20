@@ -87,4 +87,8 @@ const styles = StyleSheet.create({
   }
 });
 
+DealInput.navigationOptions = {
+  title: 'New Post',
+};
+
 export default DealInput;

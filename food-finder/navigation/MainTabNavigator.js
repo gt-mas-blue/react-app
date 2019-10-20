@@ -7,20 +7,21 @@ import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import FeedScreen from '../screens/FeedScreen';
+import DealInput from '../components/DealInput'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const FeedStack = createStackNavigator(
   {
     Feed: FeedScreen,
   },
   config
 );
 
-HomeStack.navigationOptions = {
+FeedStack.navigationOptions = {
   tabBarLabel: 'Feed',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -30,7 +31,9 @@ HomeStack.navigationOptions = {
   ),
 };
 
-HomeStack.path = '';
+FeedStack.path = '';
+
+
 
 
 const ProfileStack = createStackNavigator(
@@ -66,7 +69,7 @@ SettingsStack.navigationOptions = {
 SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
+  FeedStack,
   ProfileStack,
   SettingsStack,
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
 
 
 export default class ProfileScreen extends Component {
@@ -14,12 +14,19 @@ export default class ProfileScreen extends Component {
               <Text style={styles.name}>Nishant Sethunath</Text>
               <Text style={styles.info}>Avid Cook / Healthy Vegan</Text>
               <Text style={styles.description}>I am a Georgia Tech student and love computer science. I am a mobile app developer and I love cooking cheap, healthy food in my free time. </Text>
-              
+
               <TouchableOpacity style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Posts</Text>  
-              </TouchableOpacity>              
+                <Text style={styles.buttonText}>Posts</Text>
+              </TouchableOpacity>
               <TouchableOpacity style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>Photos</Text> 
+                <Text style={styles.buttonText}>Photos</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonContainer}>
+                <Button
+                  title="Log Out"
+                  color="#FFFFFF"
+                  onPress={() => this.props.navigation.navigate('Auth')}
+                />
               </TouchableOpacity>
             </View>
         </View>
@@ -86,4 +93,3 @@ const styles = StyleSheet.create({
     color:"#FFFFFF"
   }
 });
- 
