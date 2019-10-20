@@ -4,6 +4,7 @@ import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommun
 
 export default class DealItem extends Component {
   render() {
+    var icon = this.props.img
     return (
       <View style={[styles.container, this.props.style]}>
         <View style={styles.cardBody}>

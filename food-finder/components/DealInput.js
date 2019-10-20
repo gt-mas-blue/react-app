@@ -13,6 +13,7 @@ const DealInput = props => {
     title: "",
     description: "",
     author: "Nish",
+    img: '../assets/images/cardImage2.png',
   };
 
   const [enteredDeal, setEnteredDeal] = useState(dict);

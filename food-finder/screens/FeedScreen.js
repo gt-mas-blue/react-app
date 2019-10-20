@@ -20,11 +20,13 @@ export default function FeedScreen() {
     title: "Dummy Post 1",
     description: "Dumm Description 1",
     author: "Nish",
+    img: "../assets/images/pizza.png",
   };
   const dict2 = {
     title: "Dummy Post 2",
     description: "Dummy Description 2",
     author: "Nish",
+    img: "../assets/images/pizza.png",
   };
   const deal1 = {key: Math.random().toString(), value: dict1};
   const deal2 = {key: Math.random().toString(), value: dict2};
@@ -47,12 +49,8 @@ export default function FeedScreen() {
           <Text style={styles.searchTitle}>
             Search
           </Text>
-          <TouchableOpacity style={styles.leftIconButton}>
-                <MaterialCommunityIconsIcon
-                  name="arrow-left"
-                  style={styles.leftIcon}
-                />
-          </TouchableOpacity>
+       </View>
+       <View style={{padding: 5}}>
        </View>
 
       <DealInput
@@ -70,6 +68,7 @@ export default function FeedScreen() {
               author={itemData.item.value.author}
               title={itemData.item.value.title}
               desc={itemData.item.value.description}
+              img={itemData.item.value.img}
             />
           }
           ItemSeparatorComponent={() => <Text>  </Text>}
@@ -103,11 +102,14 @@ const styles = StyleSheet.create({
   searchBar: {
     width: 350,
     height: 40,
-    backgroundColor: "rgba(0,0,0,1)",
-    padding: 10
+    backgroundColor: "rgba(255,255,255,1)",
+    padding: 5,
+    borderRadius: 5,
+    borderWidth: 2,
+    alignSelf: "center"
   },
   searchTitle: {
-    color: "#FFFFFF",
+    color: "#000",
     paddingBottom: 12,
     fontSize: 18
   }
