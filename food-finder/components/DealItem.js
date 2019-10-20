@@ -30,18 +30,6 @@ export default class DealItem extends Component {
 }
 
 const styles = StyleSheet.create({
-  listItem: {
-    width: 356,
-    height: 206,
-    borderColor: "#000000",
-    borderWidth: 4,
-    marginTop: 7,
-    alignSelf: "center"
-
-  },
-  Title: {
-    fontSize: 32,
-
   container: {
     backgroundColor: "#FFF",
     flexWrap: "nowrap",
@@ -105,5 +93,5 @@ const styles = StyleSheet.create({
     color: "#000",
     opacity: 0.9,
     fontSize: 14
-  },
-})
+  }
+});
