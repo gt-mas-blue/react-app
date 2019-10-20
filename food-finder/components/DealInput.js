@@ -38,7 +38,7 @@ const DealInput = props => {
   };
 
   const addDealHandler = () => {
-    props.onAddDeal(enteredDeal.description);
+    props.onAddDeal(enteredDeal);
     setEnteredDeal(dict);
   };
 

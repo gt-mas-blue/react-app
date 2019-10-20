@@ -8,8 +8,8 @@ export default class DealItem extends Component {
       <View style={[styles.container, this.props.style]}>
         <View style={styles.cardBody}>
           <View style={styles.bodyContent}>
-            <Text style={styles.titleStyle}>Title goes here</Text>
-            <Text style={styles.subtitleStyle}>Deal Description:</Text>
+            <Text style={styles.titleStyle}>{this.props.title}</Text>
+            <Text style={styles.subtitleStyle}>Description:</Text>
             <Text style={styles.subtitleStyle}>{this.props.desc}</Text>
           </View>
           <Image
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
   actionText1: {
-    color: "#000",
+    color: "red",
     opacity: 0.9,
     fontSize: 14
   }
