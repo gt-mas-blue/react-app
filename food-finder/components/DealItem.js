@@ -30,7 +30,6 @@ export default class DealItem extends Component {
 }
 
 const styles = StyleSheet.create({
-<<<<<<< Updated upstream
   listItem: {
     width: 356,
     height: 206,
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
   },
   Title: {
     fontSize: 32,
-=======
+
   container: {
     backgroundColor: "#FFF",
     flexWrap: "nowrap",
@@ -62,7 +61,6 @@ const styles = StyleSheet.create({
   cardBody: {
     flexDirection: "row",
     justifyContent: "space-between"
->>>>>>> Stashed changes
   },
   bodyContent: {
     flex: 1,
