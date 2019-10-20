@@ -61,10 +61,8 @@ export default function FeedScreen() {
           data={deals}
           renderItem={itemData =>
             <DealItem
-<<<<<<< HEAD
-=======
+
               author={itemData.item.value.author}
->>>>>>> bbc23d42f72697184788bc96044142be40b32b60
               title={itemData.item.value.title}
               desc={itemData.item.value.description}
             />
@@ -86,8 +84,6 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 10,
-<<<<<<< HEAD
-<<<<<<< HEAD
   },
   searchBar: {
     width: 350,
@@ -98,11 +94,6 @@ const styles = StyleSheet.create({
   searchTitle: {
     color: "#FFFFFF",
     paddingBottom: 12,
-    fontSize: 18,
-
-=======
->>>>>>> d908940cb7e93c0248564fe0585882caf68a005f
-=======
->>>>>>> bbc23d42f72697184788bc96044142be40b32b60
+    fontSize: 18
   }
 });
