@@ -4,19 +4,32 @@ import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommun
 
 export default class DealItem extends Component {
   render() {
-    var icon = this.props.img
     return (
       <View style={[styles.container, this.props.style]}>
         <View style={styles.cardBody}>
           <View style={styles.bodyContent}>
             <Text style={styles.titleStyle}>{this.props.title}</Text>
-            <Text style={styles.subtitleStyle}>Description:</Text>
+            {this.props.desc == '' && <Text style={styles.subtitleStyle}>Description:</Text>}
             <Text style={styles.subtitleStyle}>{this.props.desc}</Text>
           </View>
+          {this.props.title != "Atwoods" && this.props.title != "Moe Monday" &&
           <Image
             source={require("../assets/images/cardImage2.png")}
             style={styles.cardItemImagePlace}
           />
+          }
+          {this.props.title == "Atwoods" &&
+            <Image
+              source={require("../assets/images/pizza.png")}
+              style={styles.cardItemImagePlace}
+            />
+          }
+          {this.props.title == "Moe Monday" &&
+            <Image
+              source={require("../assets/images/burrito.jpg")}
+              style={styles.cardItemImagePlace}
+            />
+          }
         </View>
         <View style={styles.actionBody}>
           <View style={styles.buttonGroup}>

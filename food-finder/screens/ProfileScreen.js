@@ -26,10 +26,12 @@ export default class ProfileScreen extends Component {
                 <Text style={styles.buttonText}>Photos</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.buttonContainer}>
-                <Button
-                  title="Log Out"
+                <Button style={styles.buttonText}
+                  title="Log out"
+                  titleStyle={{fontSize:12}}
                   color="#FFFFFF"
                   onPress={() => this.logout()}
+
                 />
               </TouchableOpacity>
             </View>
@@ -45,7 +47,7 @@ ProfileScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   header:{
-    backgroundColor: "#EB0B0B",
+    backgroundColor: "lavenderblush",
     height:200,
   },
   avatar: {
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
   },
   info:{
     fontSize:16,
-    color: "#FF5858",
+    color: "red",
     marginTop:10
   },
   description:{
@@ -91,9 +93,10 @@ const styles = StyleSheet.create({
     marginBottom:20,
     width:250,
     borderRadius:30,
-    backgroundColor: "#EB0B0B",
+    backgroundColor: 'rgb(0, 122, 255)',
   },
   buttonText: {
-    color:"#FFFFFF"
+    color:"#FFFFFF",
+    fontSize: 18
   }
 });

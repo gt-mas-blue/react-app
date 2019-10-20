@@ -15,14 +15,14 @@ import DealInput from '../components/DealInput';
 
 export default function FeedScreen() {
   const dict1 = {
-    title: "Dummy Post 1",
-    description: "Dumm Description 1",
+    title: "Atwoods",
+    description: "Atwoods is having a deal of 50% off two topping pizzas every Tuesday",
     author: "Nish",
     img: "../assets/images/pizza.png",
   };
   const dict2 = {
-    title: "Dummy Post 2",
-    description: "Dummy Description 2",
+    title: "Moe Monday",
+    description: "Moe Monday offers a deal of any burrito for just $7 plus tax!",
     author: "Nish",
     img: "../assets/images/pizza.png",
   };
@@ -44,9 +44,10 @@ export default function FeedScreen() {
   return (
     <View style={styles.screen}>
       <View style={styles.searchBar}>
-          <Text style={styles.searchTitle}>
-            Search
-          </Text>
+          <TextInput
+            placeholder="Search"
+            style={styles.searchTitle}/>
+
        </View>
        <View style={{padding: 5}}>
        </View>
@@ -93,12 +94,15 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,1)",
     padding: 5,
     borderRadius: 5,
-    borderWidth: 2,
+    borderWidth: 1,
+    borderColor: "gray",
     alignSelf: "center"
   },
   searchTitle: {
     color: "#000",
-    paddingBottom: 12,
-    fontSize: 18
+    padding: 5,
+    fontSize: 18,
+
+    alignItems: "center"
   }
 });
