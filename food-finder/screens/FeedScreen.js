@@ -31,10 +31,7 @@ export default function FeedScreen() {
   const [isAddMode, setIsAddMode] = useState(false);
 
   const addDealHandler = (dealTitle) => {
-    setDeals(currentDeals => [
-      ...currentDeals,
-      { key: Math.random().toString(), value: dealTitle }
-    ]);
+    setDeals(currentDeals => [{ key: Math.random().toString(), value: dealTitle }, ...currentDeals]);
     setIsAddMode(false);
   };
 
