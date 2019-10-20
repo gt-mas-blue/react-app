@@ -57,8 +57,6 @@ export default function FeedScreen() {
                 />
           </TouchableOpacity>
        </View>
-       <View style={{padding: 5}}>
-       </View>
 
       <DealInput
         visible={isAddMode}
@@ -106,17 +104,13 @@ const styles = StyleSheet.create({
     marginTop: 1
   },
   searchBar: {
-    width: 355,
+    width: 350,
     height: 40,
-    backgroundColor: "rgba(255,255,255,1)",
-    padding: 5,
-    alignSelf: "center",
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: "rgba(0,0,0,1)"
+    backgroundColor: "rgba(0,0,0,1)",
+    padding: 10
   },
   searchTitle: {
-    color: "#000",
+    color: "#FFFFFF",
     paddingBottom: 12,
     fontSize: 18
   }
