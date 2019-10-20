@@ -6,12 +6,10 @@ import {
   ScrollView,
   TextInput,
   Button,
-  FlatList,
-  TouchableOpacity
+  FlatList
 } from 'react-native';
 import DealItem from '../components/DealItem';
 import DealInput from '../components/DealInput';
-import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 
@@ -88,16 +86,6 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 10,
-  },
-  leftIcon: {
-    backgroundColor: "transparent",
-    color: "#000",
-    fontSize: 24,
-    opacity: 0.6
-  },
-  leftIconButton: {
-    padding: 11,
-    marginTop: 1
   },
   searchBar: {
     width: 350,
