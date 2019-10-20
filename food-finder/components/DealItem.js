@@ -105,5 +105,5 @@ const styles = StyleSheet.create({
     color: "#000",
     opacity: 0.9,
     fontSize: 14
-  }
-});
+  },
+})
