@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
 import axios from 'axios';
+import { AsyncStorage } from 'react-native';
+
 export default class RegisterScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +27,7 @@ export default class RegisterScreen extends React.Component {
       this.setState({
         showLoading: true
       });
+      let self = this;
       axios.post("https://foodfinderapi.herokuapp.com/UserData/", {
         username: username,
         password: password,
@@ -33,8 +36,10 @@ export default class RegisterScreen extends React.Component {
         this.setState({
           showLoading: false
         });
-        if(response.data) {
-          self.props.navigation.navigate('App');
+        if(response.statusText == "Created") {
+          AsyncStorage.setItem('username', username).then((value) => {
+            self.props.navigation.navigate('App');
+          })
         } else {
           self.setState({
             error_msg: "Login error"

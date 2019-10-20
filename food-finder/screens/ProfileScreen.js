@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
-
+import { AsyncStorage } from 'react-native';
 
 export default class ProfileScreen extends Component {
-
+  logout() {
+    AsyncStorage.removeItem('username').then((value) => {
+      this.props.navigation.navigate('Auth')
+    })
+  }
   render() {
     return (
       <ScrollView style={styles.container}>
@@ -25,7 +29,7 @@ export default class ProfileScreen extends Component {
                 <Button
                   title="Log Out"
                   color="#FFFFFF"
-                  onPress={() => this.props.navigation.navigate('Auth')}
+                  onPress={() => this.logout()}
                 />
               </TouchableOpacity>
             </View>
