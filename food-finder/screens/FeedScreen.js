@@ -87,11 +87,14 @@ const styles = StyleSheet.create({
   searchBar: {
     width: 350,
     height: 40,
-    backgroundColor: "rgba(0,0,0,1)",
-    padding: 10
+    backgroundColor: "rgba(255,255,255,1)",
+    padding: 5,
+    borderRadius: 5,
+    borderWidth: 2,
+    alignSelf: "center"
   },
   searchTitle: {
-    color: "#FFFFFF",
+    color: "#000",
     paddingBottom: 12,
     fontSize: 18
   }
