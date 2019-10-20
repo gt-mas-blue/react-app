@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
-
+import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default class DealItem extends Component {
   render() {
@@ -9,6 +9,7 @@ export default class DealItem extends Component {
         <View style={styles.cardBody}>
           <View style={styles.bodyContent}>
             <Text style={styles.titleStyle}>Title goes here</Text>
+            <Text style={styles.subtitleStyle}>Deal Description:</Text>
             <Text style={styles.subtitleStyle}>{this.props.desc}</Text>
           </View>
           <Image
@@ -17,11 +18,19 @@ export default class DealItem extends Component {
           />
         </View>
         <View style={styles.actionBody}>
+          <View style={styles.buttonGroup}>
+            <TouchableOpacity style={styles.leftBtn}>
+              <MaterialCommunityIconsIcon name="heart" style={styles.icon1} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.centerBtn}>
+              <MaterialCommunityIconsIcon name="book" style={styles.icon2} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.rightBtn}>
+              <MaterialCommunityIconsIcon name="share" style={styles.icon3} />
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity style={styles.actionButton1}>
-            <Text style={styles.actionText1}>ACTION 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton2}>
-            <Text style={styles.actionText2}>ACTION 2</Text>
+            <Text style={styles.actionText1}>Author</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -30,8 +39,9 @@ export default class DealItem extends Component {
 }
 
 const styles = StyleSheet.create({
+
   container: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#fff",
     flexWrap: "nowrap",
     elevation: 3,
     borderRadius: 2,
@@ -47,10 +57,12 @@ const styles = StyleSheet.create({
     overflow: "hidden"
   },
   cardBody: {
+    color: "#ffb6c1",
     flexDirection: "row",
     justifyContent: "space-between"
   },
   bodyContent: {
+    color: "#ffb6c1",
     flex: 1,
     padding: 16,
     paddingTop: 24
@@ -61,35 +73,55 @@ const styles = StyleSheet.create({
     fontSize: 24
   },
   subtitleStyle: {
+    backgroundColor: "#e0ffff",
     color: "#000",
     opacity: 0.5,
     fontSize: 14,
-    lineHeight: 16
+    lineHeight: 14
   },
   cardItemImagePlace: {
     width: 80,
     height: 80,
-    backgroundColor: "#ccc",
     margin: 16
   },
-  actionBody: {
+  buttonGroup: {
     flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  leftBtn: {
+    padding: 8
+  },
+  icon1: {
+    fontSize: 24,
+    color: "#000",
+    opacity: 0.5
+  },
+  centerBtn: {
+    padding: 8
+  },
+  icon2: {
+    fontSize: 24,
+    color: "#000",
+    opacity: 0.5
+  },
+  rightBtn: {
+    padding: 8
+  },
+  icon3: {
+    fontSize: 24,
+    color: "#000",
+    opacity: 0.5
+  },
+  actionBody: {
+    flexDirection: "column",
     padding: 8
   },
   actionButton1: {
-    height: 36,
-    padding: 8
-  },
-  actionText1: {
-    color: "#000",
-    opacity: 0.9,
+    justifyContent: "flex-end",
+    alignItems: "flex-start",
     fontSize: 14
   },
-  actionButton2: {
-    height: 36,
-    padding: 8
-  },
-  actionText2: {
+  actionText1: {
     color: "#000",
     opacity: 0.9,
     fontSize: 14

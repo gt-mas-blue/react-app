@@ -42,7 +42,9 @@ export default function FeedScreen() {
       <FlatList
           contentContainerStyle={{ flexGrow: 1 }}
           data={deals}
-          renderItem={itemData => <DealItem desc={itemData.item.value} />}
+          renderItem={itemData => <DealItem
+            desc={itemData.item.value}
+            />}
           ItemSeparatorComponent={() => <Text>  </Text>}
       />
 

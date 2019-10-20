@@ -9,26 +9,42 @@ import {
 
 
 const DealInput = props => {
+  const dict = {
+    title: "",
+    description: "",
+    author: "Nish",
+  };
 
-  const [enteredDeal, setEnteredDeal] = useState('');
-  const title = "Moe Mondays";
-  const restaurant = "Moes";
-  const price = "$$";
+  const [enteredDeal, setEnteredDeal] = useState(dict);
 
+  const titleHandler = (enteredText) => {
+    var newDict = {
+      title: enteredText,
+      description: enteredDeal.description,
+      author: enteredDeal.author,
+      };
+    setEnteredDeal(newDict);
+    console.log(enteredDeal);
+  };
 
   const dealInputHandler = (enteredText) => {
-    setEnteredDeal(enteredText);
+    var newDict = {
+      title: enteredDeal.title,
+      description: enteredText,
+      author: enteredDeal.author,
+      };
+    setEnteredDeal(newDict);
+    console.log(enteredDeal);
   };
 
   const addDealHandler = () => {
-
-    props.onAddDeal(enteredDeal);
-    setEnteredDeal('');
+    props.onAddDeal(enteredDeal.description);
+    setEnteredDeal(dict);
   };
 
   const cancelButtonHandler = () => {
     props.onCancel()
-    setEnteredDeal('');
+    setEnteredDeal(dict);
   }
 
 
@@ -38,21 +54,16 @@ const DealInput = props => {
         <TextInput
           placeholder="Title"
           style={styles.input}
-        />
-        <TextInput
-          placeholder="Restaurant"
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Price"
-          style={styles.input}
+          onChangeText={titleHandler}
+          value={enteredDeal.title}
+
         />
 
         <TextInput
           placeholder="Description/Deal"
           style={styles.input}
-          onChangeText = {dealInputHandler}
-          value={enteredDeal}
+          onChangeText={dealInputHandler}
+          value={enteredDeal.description}
         />
 
 
