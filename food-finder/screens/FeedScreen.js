@@ -57,6 +57,7 @@ export default function FeedScreen() {
           data={deals}
           renderItem={itemData =>
             <DealItem
+              author={itemData.item.value.author}
               title={itemData.item.value.title}
               desc={itemData.item.value.description}
             />

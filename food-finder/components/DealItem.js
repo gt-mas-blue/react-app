@@ -29,9 +29,13 @@ export default class DealItem extends Component {
               <MaterialCommunityIconsIcon name="share" style={styles.icon3} />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.actionButton1}>
-            <Text style={styles.actionText1}>Author</Text>
-          </TouchableOpacity>
+          <View style={{flexDirection:"row"}}>
+            <Text>By: </Text>
+            <TouchableOpacity style={styles.actionButton1}>
+              <Text style={styles.actionText1}>{this.props.author}</Text>
+            </TouchableOpacity>
+          </View>
+
         </View>
       </View>
     );
@@ -41,11 +45,11 @@ export default class DealItem extends Component {
 const styles = StyleSheet.create({
 
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: "lavenderblush",
     flexWrap: "nowrap",
     elevation: 3,
-    borderRadius: 2,
-    borderColor: "#CCC",
+    borderRadius: 5,
+    borderColor: "#FFF",
     borderWidth: 1,
     shadowOffset: {
       height: 2,
@@ -73,7 +77,6 @@ const styles = StyleSheet.create({
     fontSize: 24
   },
   subtitleStyle: {
-    backgroundColor: "#e0ffff",
     color: "#000",
     opacity: 0.5,
     fontSize: 14,
@@ -82,7 +85,8 @@ const styles = StyleSheet.create({
   cardItemImagePlace: {
     width: 80,
     height: 80,
-    margin: 16
+    margin: 16,
+    borderRadius: 5
   },
   buttonGroup: {
     flexDirection: "row",
@@ -123,6 +127,7 @@ const styles = StyleSheet.create({
   },
   actionText1: {
     color: "red",
+    alignItems: "center",
     opacity: 0.9,
     fontSize: 14
   }
