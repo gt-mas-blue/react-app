@@ -46,6 +46,8 @@ export default function FeedScreen() {
             Search
           </Text>
        </View>
+       <View style={{padding: 5}}>
+       </View>
 
       <DealInput
         visible={isAddMode}
