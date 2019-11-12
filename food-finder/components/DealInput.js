@@ -47,6 +47,7 @@ const DealInput = props => {
     props.onCancel()
     setEnteredDeal(dict);
   }
+  
 
 
   return (
@@ -54,6 +55,7 @@ const DealInput = props => {
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Title"
+          placeholderTextColor = "#000"
           style={styles.input}
           onChangeText={titleHandler}
           value={enteredDeal.title}
@@ -62,11 +64,15 @@ const DealInput = props => {
 
         <TextInput
           placeholder="Description/Deal"
+          placeholderTextColor = "#000"
           style={styles.input}
           onChangeText={dealInputHandler}
           value={enteredDeal.description}
         />
-
+        <Button 
+          title="Choose Photo"
+          onPress={this.handleChoosePhoto}
+          />
 
         <View style={styles.buttons}>
           <Button title="Post" onPress={addDealHandler} />
