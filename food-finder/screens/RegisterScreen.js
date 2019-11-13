@@ -3,7 +3,6 @@ import { StyleSheet, Text, View} from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
-import * as Constants from "../constants/Network";
 
 export default class RegisterScreen extends React.Component {
   constructor(props) {
