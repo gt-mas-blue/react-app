@@ -1,47 +1,67 @@
 import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TextInput,
-  Button,
-  FlatList
-} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Button, FlatList } from 'react-native';
 import DealItem from '../components/DealItem';
 import DealInput from '../components/DealInput';
+import { AsyncStorage } from 'react-native';
 
+const dict1 = {
+  title: "Atwoods",
+  description: "Atwoods is having a deal of 50% off two topping pizzas every Tuesday",
+  author: "Nish",
+  img: "../assets/images/pizza.png",
+};
+const dict2 = {
+  title: "Moe Monday",
+  description: "Moe Monday offers a deal of any burrito for just $7 plus tax!",
+  author: "Nish",
+  img: "../assets/images/pizza.png",
+};
+const deal1 = {key: Math.random().toString(), value: dict1};
+const deal2 = {key: Math.random().toString(), value: dict2};
 
+const [deals, setDeals] = useState([deal1, deal2]);
+const [isAddMode, setIsAddMode] = useState(false);
 
-export default function FeedScreen() {
-  const dict1 = {
-    title: "Atwoods",
-    description: "Atwoods is having a deal of 50% off two topping pizzas every Tuesday",
-    author: "Nish",
-    img: "../assets/images/pizza.png",
-  };
-  const dict2 = {
-    title: "Moe Monday",
-    description: "Moe Monday offers a deal of any burrito for just $7 plus tax!",
-    author: "Nish",
-    img: "../assets/images/pizza.png",
-  };
-  const deal1 = {key: Math.random().toString(), value: dict1};
-  const deal2 = {key: Math.random().toString(), value: dict2};
+const addDealHandler = (dealTitle) => {
+  setDeals(currentDeals => [{ key: Math.random().toString(), value: dealTitle }, ...currentDeals]);
+  setIsAddMode(false);
+};
 
-  const [deals, setDeals] = useState([deal1, deal2]);
-  const [isAddMode, setIsAddMode] = useState(false);
+const cancelButtonHandler = () => {
+  setIsAddMode(false);
+};
 
-  const addDealHandler = (dealTitle) => {
-    setDeals(currentDeals => [{ key: Math.random().toString(), value: dealTitle }, ...currentDeals]);
-    setIsAddMode(false);
-  };
-
-  const cancelButtonHandler = () => {
-    setIsAddMode(false);
-  };
-
-  return (
+export default class FeedScreen extends React.Component {
+  constructor(props) {
+    super();
+    this.state = {
+      posts: [],
+      isLoading: true,
+      error_msg: ""
+    };
+  }
+  componentWillMount() {
+    this.setState({
+      isLoading: true
+    });
+    var self = this;
+    axios.get(Constants.SERVER_URL + "/GetAllPosts/").then(res => {
+      this.setState({
+        isLoading: false
+      });
+      if(res.data) {
+        self.setState({
+          posts: res.data
+        })
+      } else {
+        self.setState({
+          error_msg: "Login error"
+        })
+      }
+    })
+  }
+  
+  render (){
     <View style={styles.screen}>
       <View style={styles.searchBar}>
           <TextInput
@@ -75,11 +95,10 @@ export default function FeedScreen() {
 
       <Button title="New Post" onPress={() => setIsAddMode(true)} />
 
-    </View>
-  );
+    </View>}
 }
 
-FeedScreen.navigationOptions = {
+navigationOptions = {
   title: 'Feed',
 };
 

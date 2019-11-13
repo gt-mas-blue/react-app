@@ -29,7 +29,7 @@ export default class RegisterScreen extends React.Component {
         showLoading: true
       });
       let self = this;
-      axios.post("https://foodfinderapi.herokuapp.com/UserData/", {
+      axios.post(Constants.SERVER_URL + "/UserData/", {
         username: username,
         password: password,
         email: email

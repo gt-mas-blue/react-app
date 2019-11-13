@@ -1,1 +1,1 @@
-export const SERVER_URL = "https://foodfinderapi.herokuapp.com/";
+export const SERVER_URL = "https://foodfinderapi.herokuapp.com";
