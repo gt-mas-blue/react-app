@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View} from 'react-native';
 import { AsyncStorage } from 'react-native';
 import { Input, Button, Icon } from 'react-native-elements';
+import * as Constants from "../constants/Network";
 import axios from 'axios';
 
 export default class LoginScreen extends React.Component {
@@ -28,16 +29,14 @@ export default class LoginScreen extends React.Component {
     });
   }
 
-  validateUsername(username) {
-    return true;
-  }
+
   submitLoginCredentials() {
     const { username, password } = this.state;
     this.setState({
       showLoading: true
     });
     let self = this;
-    axios.get("https://foodfinderapi.herokuapp.com/UserData/" + username + "/" + password).then(res => {
+    axios.get(Constants.SERVER_URL + "/UserData/" + username + "/" + password).then(res => {
       this.setState({
         showLoading: false
       });
@@ -93,7 +92,6 @@ export default class LoginScreen extends React.Component {
               returnKeyType="next"
               ref={input => (this.usernameInput = input)}
               onSubmitEditing={() => {
-                this.setState({ username_valid: this.validateUsername(username) });
                 this.passwordInput.focus();
               }}
               blurOnSubmit={false}
