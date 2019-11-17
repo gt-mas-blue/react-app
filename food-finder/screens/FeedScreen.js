@@ -26,6 +26,7 @@ export default function FeedScreen() {
     author: "Nish",
     img: "../assets/images/pizza.png",
   };
+  
   const deal1 = {key: Math.random().toString(), value: dict1};
   const deal2 = {key: Math.random().toString(), value: dict2};
 

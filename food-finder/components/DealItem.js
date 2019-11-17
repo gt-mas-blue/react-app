@@ -14,7 +14,7 @@ export default class DealItem extends Component {
           </View>
           {this.props.title != "Atwoods" && this.props.title != "Moe Monday" &&
           <Image
-            source={require("../assets/images/cardImage2.png")}
+            source={{uri: this.props.img}}
             style={styles.cardItemImagePlace}
           />
           }

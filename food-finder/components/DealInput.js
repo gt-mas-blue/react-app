@@ -1,19 +1,22 @@
 import React, {useState} from 'react';
 import {
   View,
+  Image,
   TextInput,
   Button,
   StyleSheet,
-  Modal
+  Modal,
+  Alert
 } from 'react-native';
-import { Constants, ImagePicker, Permissions } from 'expo';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
 
 const DealInput = props => {
   const dict = {
     title: "",
     description: "",
     author: "Nish",
-    img: null,
+    img: "../assets/images/cardImage2.png",
   };
 
   const [enteredDeal, setEnteredDeal] = useState(dict);
@@ -41,8 +44,18 @@ const DealInput = props => {
   };
 
   onChooseImagePress = async () => {
+    Permissions.askAsync(Permissions.CAMERA)
+    Permissions.askAsync(Permissions.CAMERA_ROLL)
     let result = await ImagePicker.launchCameraAsync();
-    //let result = await ImagePicker.launchImageLibraryAsync();
+    var newDict = {
+      title: enteredDeal.title,
+      description: enteredDeal.description,
+      author: enteredDeal.author,
+      img: result.uri,
+      };
+    setEnteredDeal(newDict);
+
+    // let result = await ImagePicker.launchImageLibraryAsync();
 
     if (!result.cancelled) {
       this.uploadImage(result.uri, "test-image")
@@ -55,6 +68,14 @@ const DealInput = props => {
     }
   }
 
+  uploadImage = async (uri, imageName) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    // var ref = firebase.storage().ref().child("images/" + imageName);
+    // return ref.put(blob);
+  }
+
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
     setEnteredDeal(dict);
@@ -64,7 +85,7 @@ const DealInput = props => {
     props.onCancel()
     setEnteredDeal(dict);
   }
-
+  
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
@@ -85,6 +106,9 @@ const DealInput = props => {
         <Button
           title="Choose Photo"
           onPress={this.onChooseImagePress}
+          />
+        <Image
+          source={{uri: dict.img}}
           />
         <View style={styles.buttons}>
           <Button title="Post" onPress={addDealHandler} />
