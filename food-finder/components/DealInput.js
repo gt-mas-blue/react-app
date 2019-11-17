@@ -70,7 +70,7 @@ const DealInput = props => {
 
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
-    // // need to upload deal to the server
+    // // need to a post to the server somehow
     axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
       username: AsyncStorage.getItem('username'),
       postTitle: enteredDeal.title,

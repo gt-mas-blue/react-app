@@ -31,6 +31,7 @@ export default function FeedScreen() {
   const deal2 = {key: Math.random().toString(), value: dict2};
 
   const [deals, setDeals] = useState([deal1, deal2]);
+  //^^ todo: pass a fetch of all deals as a param for useState ^^
   const [isAddMode, setIsAddMode] = useState(false);
 
   const addDealHandler = (dealTitle) => {
@@ -64,7 +65,6 @@ export default function FeedScreen() {
           data={deals}
           renderItem={itemData =>
             <DealItem
-
               author={itemData.item.value.author}
               title={itemData.item.value.title}
               desc={itemData.item.value.description}
