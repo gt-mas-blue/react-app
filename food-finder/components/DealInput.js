@@ -51,6 +51,7 @@ const DealInput = props => {
     Permissions.askAsync(Permissions.CAMERA)
     Permissions.askAsync(Permissions.CAMERA_ROLL)
     let result = await ImagePicker.launchCameraAsync();
+    // let result = await ImagePicker.launchImageLibraryAsync();
     var newDict = {
       title: enteredDeal.title,
       description: enteredDeal.description,
@@ -65,7 +66,6 @@ const DealInput = props => {
     } else {
       Alert.alert("Error!")
     }
-    // let result = await ImagePicker.launchImageLibraryAsync();
   }
 
   const addDealHandler = () => {
