@@ -6,14 +6,14 @@ import {
   StyleSheet,
   Modal
 } from 'react-native';
-
+import { Constants, ImagePicker, Permissions } from 'expo';
 
 const DealInput = props => {
   const dict = {
     title: "",
     description: "",
     author: "Nish",
-    img: "../assets/images/cardImage2.png",
+    img: null,
   };
 
   const [enteredDeal, setEnteredDeal] = useState(dict);
@@ -23,6 +23,7 @@ const DealInput = props => {
       title: enteredText,
       description: enteredDeal.description,
       author: enteredDeal.author,
+      img: enteredDeal.img,
       };
     setEnteredDeal(newDict);
     console.log(enteredDeal);
@@ -33,10 +34,26 @@ const DealInput = props => {
       title: enteredDeal.title,
       description: enteredText,
       author: enteredDeal.author,
+      img: enteredDeal.img,
       };
     setEnteredDeal(newDict);
     console.log(enteredDeal);
   };
+
+  onChooseImagePress = async () => {
+    let result = await ImagePicker.launchCameraAsync();
+    //let result = await ImagePicker.launchImageLibraryAsync();
+
+    if (!result.cancelled) {
+      this.uploadImage(result.uri, "test-image")
+        .then(() => {
+          Alert.alert("Success");
+        })
+        .catch((error) => {
+          Alert.alert(error);
+        });
+    }
+  }
 
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
@@ -47,8 +64,6 @@ const DealInput = props => {
     props.onCancel()
     setEnteredDeal(dict);
   }
-  
-
 
   return (
     <Modal visible={props.visible} animationType="slide">
@@ -59,9 +74,7 @@ const DealInput = props => {
           style={styles.input}
           onChangeText={titleHandler}
           value={enteredDeal.title}
-
         />
-
         <TextInput
           placeholder="Description/Deal"
           placeholderTextColor = "#000"
@@ -69,16 +82,14 @@ const DealInput = props => {
           onChangeText={dealInputHandler}
           value={enteredDeal.description}
         />
-        <Button 
+        <Button
           title="Choose Photo"
-          onPress={this.handleChoosePhoto}
+          onPress={this.onChooseImagePress}
           />
-
         <View style={styles.buttons}>
           <Button title="Post" onPress={addDealHandler} />
           <Button title="Cancel" color="red" onPress={cancelButtonHandler} />
         </View>
-
       </View>
     </Modal>
   );
