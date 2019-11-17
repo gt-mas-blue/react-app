@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
-//currently deal
+
 export default FeedView = ({ posts, props }) => {
   postList = []
   if (posts) {
@@ -9,35 +9,36 @@ export default FeedView = ({ posts, props }) => {
       postList.push(
         <PostItem
         key={posts[i]._id}
-        title={posts[i].title}
-        username={posts[i].username}
-        description={posts[i].description}
+        post={posts[i]}
         props={props}
         />
       )
     }
   }
+  return <View>{postList}</View>
+}
+export const PostItem = ({ post, props }) => {
   return (
-    <View style={[styles.container, this.props.style]}>
+    <View style={[styles.container]}>
       <View style={styles.cardBody}>
         <View style={styles.bodyContent}>
-          <Text style={styles.titleStyle}>{this.props.title}</Text>
-          {deal.description == '' && <Text style={styles.subtitleStyle}>Description:</Text>}
-          <Text style={styles.subtitleStyle}>{deal.description}</Text>
+          <Text style={styles.titleStyle}>{post.postTitle}</Text>
+          {post.description == '' && <Text style={styles.subtitleStyle}>Description:</Text>}
+          <Text style={styles.subtitleStyle}>{post.description}</Text>
         </View>
-        {deal.title != "Atwoods" && deal.title != "Moe Monday" &&
+        {post.title != "Atwoods" && post.title != "Moe Monday" &&
           <Image
             source={require("../assets/images/cardImage2.png")}
             style={styles.cardItemImagePlace}
           />
         }
-        {deal.title == "Atwoods" &&
+        {post.title == "Atwoods" &&
           <Image
             source={require("../assets/images/pizza.png")}
             style={styles.cardItemImagePlace}
           />
         }
-        {deal.title == "Moe Monday" &&
+        {post.title == "Moe Monday" &&
           <Image
             source={require("../assets/images/burrito.jpg")}
             style={styles.cardItemImagePlace}
@@ -59,7 +60,7 @@ export default FeedView = ({ posts, props }) => {
         <View style={{ flexDirection: "row" }}>
           <Text>By: </Text>
           <TouchableOpacity style={styles.actionButton1}>
-            <Text style={styles.actionText1}>{this.props.author}</Text>
+            <Text style={styles.actionText1}>{post.username}</Text>
           </TouchableOpacity>
         </View>
 
@@ -67,7 +68,6 @@ export default FeedView = ({ posts, props }) => {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
 
