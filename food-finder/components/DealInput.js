@@ -6,10 +6,12 @@ import {
   Button,
   StyleSheet,
   Modal,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import axios from 'axios'
 
 const DealInput = props => {
   const dict = {
@@ -54,30 +56,22 @@ const DealInput = props => {
       img: result.uri,
       };
     setEnteredDeal(newDict);
-
-    // let result = await ImagePicker.launchImageLibraryAsync();
-
     if (!result.cancelled) {
-      this.uploadImage(result.uri, "test-image")
-        .then(() => {
-          Alert.alert("Success");
-        })
-        .catch((error) => {
-          Alert.alert(error);
-        });
+      Alert.alert("Success");
+
+    } else {
+      Alert.alert("Error!")
     }
-  }
-
-  uploadImage = async (uri, imageName) => {
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    // var ref = firebase.storage().ref().child("images/" + imageName);
-    // return ref.put(blob);
+    // let result = await ImagePicker.launchImageLibraryAsync();
   }
 
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
+    // // need to upload deal to the server
+    axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
+      username: AsyncStorage.getItem('username'),
+      postTitle: enteredDeal.title
+    })
     setEnteredDeal(dict);
   };
 
@@ -85,7 +79,7 @@ const DealInput = props => {
     props.onCancel()
     setEnteredDeal(dict);
   }
-  
+
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
