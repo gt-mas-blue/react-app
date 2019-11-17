@@ -1,9 +1,22 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
-
-export default DealItem =  ({ deal, props }) => {
-
+//currently deal
+export default FeedView = ({ posts, props }) => {
+  postList = []
+  if (posts) {
+    for (let i = 0; i < posts.length; i++){
+      postList.push(
+        <PostItem
+        key={posts[i]._id}
+        title={posts[i].title}
+        username={posts[i].username}
+        description={posts[i].description}
+        props={props}
+        />
+      )
+    }
+  }
   return (
     <View style={[styles.container, this.props.style]}>
       <View style={styles.cardBody}>

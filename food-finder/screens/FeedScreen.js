@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, FlatList } from 'react-native';
-import DealItem from '../components/DealItem';
+import FeedView from '../components/Feed';
 import DealInput from '../components/DealInput';
 import { AsyncStorage } from 'react-native';
 
@@ -45,7 +45,7 @@ export default class FeedScreen extends React.Component {
       isLoading: true
     });
     var self = this;
-    axios.get(Constants.SERVER_URL + "/GetAllPosts/").then(res => {
+    axios.get("https://foodfinderapi.herokuapp.com/Posts/yes").then(res => {
       this.setState({
         isLoading: false
       });
@@ -62,6 +62,8 @@ export default class FeedScreen extends React.Component {
   }
   
   render (){
+    if (this.state.isLoading) return <Text />;
+    return (
     <View style={styles.screen}>
       <View style={styles.searchBar}>
           <TextInput
@@ -82,7 +84,7 @@ export default class FeedScreen extends React.Component {
           contentContainerStyle={{ flexGrow: 1 }}
           data={deals}
           renderItem={itemData =>
-            <DealItem
+            <FeedView
 
               author={itemData.item.value.author}
               title={itemData.item.value.title}
@@ -95,7 +97,8 @@ export default class FeedScreen extends React.Component {
 
       <Button title="New Post" onPress={() => setIsAddMode(true)} />
 
-    </View>}
+    </View>
+    )}
 }
 
 navigationOptions = {
