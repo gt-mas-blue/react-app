@@ -14,6 +14,8 @@ import * as Permissions from 'expo-permissions';
 import axios from 'axios'
 
 const DealInput = props => {
+  src = "../assets/images/cardImage2.png";
+
   const dict = {
     title: "",
     description: "",
@@ -55,6 +57,7 @@ const DealInput = props => {
       author: enteredDeal.author,
       img: result.uri,
       };
+      src = result.uri;
     setEnteredDeal(newDict);
     if (!result.cancelled) {
       Alert.alert("Success");
@@ -70,7 +73,9 @@ const DealInput = props => {
     // // need to upload deal to the server
     axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
       username: AsyncStorage.getItem('username'),
-      postTitle: enteredDeal.title
+      postTitle: enteredDeal.title,
+      likes: 0,
+      imgPointer: enteredDeal.img
     })
     setEnteredDeal(dict);
   };
@@ -102,7 +107,7 @@ const DealInput = props => {
           onPress={this.onChooseImagePress}
           />
         <Image
-          source={{uri: dict.img}}
+          source={{uri: src}}
           />
         <View style={styles.buttons}>
           <Button title="Post" onPress={addDealHandler} />
