@@ -1,49 +1,45 @@
 import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TextInput,
-  Button,
-  FlatList
-} from 'react-native';
-import DealItem from '../components/DealItem';
+import { StyleSheet, Text, View, ScrollView, TextInput, Button, FlatList } from 'react-native';
+import FeedView from '../components/Feed';
 import DealInput from '../components/DealInput';
+import { AsyncStorage } from 'react-native';
+import axios from 'axios';
 
-
-
-export default function FeedScreen() {
-  const dict1 = {
-    title: "Atwoods",
-    description: "Atwoods is having a deal of 50% off two topping pizzas every Tuesday",
-    author: "Nish",
-    img: "../assets/images/pizza.png",
-  };
-  const dict2 = {
-    title: "Moe Monday",
-    description: "Moe Monday offers a deal of any burrito for just $7 plus tax!",
-    author: "Nish",
-    img: "../assets/images/pizza.png",
-  };
+export default class FeedScreen extends React.Component {
+  constructor(props) {
+    super();
+    this.state = {
+      posts: [],
+      isLoading: true,
+      error_msg: "",
+      isAddMode: false,
+      setIsAddMode: false
+    };
+  }
+  componentWillMount() {
+    this.setState({
+      isLoading: true
+    });
+    var self = this;
+    axios.get("https://foodfinderapi.herokuapp.com/Posts/yes").then(res => {
+      self.setState({
+        isLoading: false
+      });
+      if(res.data) {
+        self.setState({
+          posts: res.data
+        })
+      } else {
+        self.setState({
+          error_msg: "Login error"
+        })
+      }
+    })
+  }
   
-  const deal1 = {key: Math.random().toString(), value: dict1};
-  const deal2 = {key: Math.random().toString(), value: dict2};
-
-  const [deals, setDeals] = useState([deal1, deal2]);
-  //^^ todo: pass a fetch of all deals as a param for useState ^^
-  const [isAddMode, setIsAddMode] = useState(false);
-
-  const addDealHandler = (dealTitle) => {
-    setDeals(currentDeals => [{ key: Math.random().toString(), value: dealTitle }, ...currentDeals]);
-    setIsAddMode(false);
-  };
-
-  const cancelButtonHandler = () => {
-    setIsAddMode(false);
-  };
-
-  return (
+  render (){
+    if (this.state.isLoading) return <Text />;
+    return (
     <View style={styles.screen}>
       <View style={styles.searchBar}>
           <TextInput
@@ -52,35 +48,26 @@ export default function FeedScreen() {
 
        </View>
        <View style={{padding: 5}}>
-       </View>
+        </View>
 
-      <DealInput
-        visible={isAddMode}
-        onAddDeal={addDealHandler}
-        onCancel={cancelButtonHandler}
-      />
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+        >
+          <FeedView
+            posts={this.state.posts}
+            props={this.props}
+          />
 
-      <FlatList
-          contentContainerStyle={{ flexGrow: 1 }}
-          data={deals}
-          renderItem={itemData =>
-            <DealItem
-              author={itemData.item.value.author}
-              title={itemData.item.value.title}
-              desc={itemData.item.value.description}
-              img={itemData.item.value.img}
-            />
-          }
-          ItemSeparatorComponent={() => <Text>  </Text>}
-      />
+        </ScrollView>
 
-      <Button title="New Post" onPress={() => setIsAddMode(true)} />
+        <Button title="New Post" />
 
     </View>
-  );
+    )}
 }
 
-FeedScreen.navigationOptions = {
+navigationOptions = {
   title: 'Feed',
 };
 
@@ -106,5 +93,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
 
     alignItems: "center"
+  },
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
+    paddingTop: 15
   }
 });
