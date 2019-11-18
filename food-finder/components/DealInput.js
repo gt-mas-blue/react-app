@@ -50,16 +50,19 @@ const DealInput = props => {
   onChooseImagePress = async () => {
     Permissions.askAsync(Permissions.CAMERA)
     Permissions.askAsync(Permissions.CAMERA_ROLL)
-    let result = await ImagePicker.launchCameraAsync();
+    let result = await ImagePicker.launchCameraAsync(base64);
     // let result = await ImagePicker.launchImageLibraryAsync();
     // todo: Upload the image, passback the mongoID, store mongoID in field img:
+    ret = axios.post("https://foodfinderapi.herokuapp.com/Images/", {
+      data: result.base64,
+      contentType: "jpeg"
+    }
     var newDict = {
       title: enteredDeal.title,
       description: enteredDeal.description,
       author: enteredDeal.author,
-      img: result.uri,
+      img: ret.imgid,
       };
-      src = result.uri;
     setEnteredDeal(newDict);
     if (!result.cancelled) {
       Alert.alert("Success");
