@@ -16,6 +16,7 @@ export default class FeedScreen extends React.Component {
       setIsAddMode: false
     };
   }
+
   componentWillMount() {
     this.setState({
       isLoading: true
@@ -36,7 +37,22 @@ export default class FeedScreen extends React.Component {
       }
     })
   }
+  addDeal = () => {
+    this.setState({
+      isAddMode: true
+    })
+  }
+  addDealHandler = (dealTitle) => {
+    this.setState({
+      isAddMode: false
+    })
+  };
   
+  cancelButtonHandler = () => {
+    this.setState({
+      isAddMode: false
+    })
+  };
   render (){
     if (this.state.isLoading) return <Text />;
     return (
@@ -49,7 +65,11 @@ export default class FeedScreen extends React.Component {
        </View>
        <View style={{padding: 5}}>
         </View>
-
+        <DealInput
+        visible={this.state.isAddMode}
+        onAddDeal={this.addDealHandler}
+        onCancel={this.cancelButtonHandler}
+      />
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}
@@ -61,7 +81,7 @@ export default class FeedScreen extends React.Component {
 
         </ScrollView>
 
-        <Button title="New Post" />
+        <Button title="New Post" onPress={this.addDeal} />
 
     </View>
     )}
