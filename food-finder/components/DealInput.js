@@ -52,6 +52,7 @@ const DealInput = props => {
     Permissions.askAsync(Permissions.CAMERA_ROLL)
     let result = await ImagePicker.launchCameraAsync();
     // let result = await ImagePicker.launchImageLibraryAsync();
+    // here we can try to upload the image, we can then get a image number?
     var newDict = {
       title: enteredDeal.title,
       description: enteredDeal.description,
@@ -70,7 +71,8 @@ const DealInput = props => {
 
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
-    // // need to a post to the server somehow
+    console.log(enteredDeal);
+    // // need to a post to the server somehow -> also need to get
     axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
       username: AsyncStorage.getItem('username'),
       postTitle: enteredDeal.title,
