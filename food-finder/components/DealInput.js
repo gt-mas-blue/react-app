@@ -52,7 +52,7 @@ const DealInput = props => {
     Permissions.askAsync(Permissions.CAMERA_ROLL)
     let result = await ImagePicker.launchCameraAsync();
     // let result = await ImagePicker.launchImageLibraryAsync();
-    // here we can try to upload the image, we can then get a image number?
+    // todo: Upload the image, passback the mongoID, store mongoID in field img:
     var newDict = {
       title: enteredDeal.title,
       description: enteredDeal.description,
@@ -72,10 +72,11 @@ const DealInput = props => {
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
     console.log(enteredDeal);
-    // // need to a post to the server somehow -> also need to get
+    // this should be able to work
     axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
       username: AsyncStorage.getItem('username'),
       postTitle: enteredDeal.title,
+      description: enteredDeal.description,
       likes: 0,
       imgPointer: enteredDeal.img
     })
