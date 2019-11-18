@@ -47,7 +47,7 @@ const DealInput = props => {
     console.log(enteredDeal);
   };
 
-  onChooseImagePress = async () => {
+   onChooseImagePress = async () => {
     Permissions.askAsync(Permissions.CAMERA)
     Permissions.askAsync(Permissions.CAMERA_ROLL)
     let result = await ImagePicker.launchCameraAsync(base64);
@@ -56,7 +56,7 @@ const DealInput = props => {
     ret = axios.post("https://foodfinderapi.herokuapp.com/Images/", {
       data: result.base64,
       contentType: "jpeg"
-    }
+    });
     var newDict = {
       title: enteredDeal.title,
       description: enteredDeal.description,
@@ -70,7 +70,7 @@ const DealInput = props => {
     } else {
       Alert.alert("Error!")
     }
-  }
+  } 
 
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
