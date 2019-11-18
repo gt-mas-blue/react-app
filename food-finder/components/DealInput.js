@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
 import {
   View,
+  Image,
   TextInput,
   Button,
   StyleSheet,
-  Modal
+  Modal,
+  Alert,
+  AsyncStorage
 } from 'react-native';
-
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+import axios from 'axios'
 
 const DealInput = props => {
+  src = "../assets/images/cardImage2.png";
+
   const dict = {
     title: "",
     description: "",
@@ -23,6 +30,7 @@ const DealInput = props => {
       title: enteredText,
       description: enteredDeal.description,
       author: enteredDeal.author,
+      img: enteredDeal.img,
       };
     setEnteredDeal(newDict);
     console.log(enteredDeal);
@@ -33,13 +41,42 @@ const DealInput = props => {
       title: enteredDeal.title,
       description: enteredText,
       author: enteredDeal.author,
+      img: enteredDeal.img,
       };
     setEnteredDeal(newDict);
     console.log(enteredDeal);
   };
 
+  onChooseImagePress = async () => {
+    Permissions.askAsync(Permissions.CAMERA)
+    Permissions.askAsync(Permissions.CAMERA_ROLL)
+    let result = await ImagePicker.launchCameraAsync();
+    // let result = await ImagePicker.launchImageLibraryAsync();
+    var newDict = {
+      title: enteredDeal.title,
+      description: enteredDeal.description,
+      author: enteredDeal.author,
+      img: result.uri,
+      };
+      src = result.uri;
+    setEnteredDeal(newDict);
+    if (!result.cancelled) {
+      Alert.alert("Success");
+
+    } else {
+      Alert.alert("Error!")
+    }
+  }
+
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
+    // // need to a post to the server somehow
+    axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
+      username: AsyncStorage.getItem('username'),
+      postTitle: enteredDeal.title,
+      likes: 0,
+      imgPointer: enteredDeal.img
+    })
     setEnteredDeal(dict);
   };
 
@@ -47,8 +84,6 @@ const DealInput = props => {
     props.onCancel()
     setEnteredDeal(dict);
   }
-  
-
 
   return (
     <Modal visible={props.visible} animationType="slide">
@@ -59,9 +94,7 @@ const DealInput = props => {
           style={styles.input}
           onChangeText={titleHandler}
           value={enteredDeal.title}
-
         />
-
         <TextInput
           placeholder="Description/Deal"
           placeholderTextColor = "#000"
@@ -69,16 +102,17 @@ const DealInput = props => {
           onChangeText={dealInputHandler}
           value={enteredDeal.description}
         />
-        <Button 
+        <Button
           title="Choose Photo"
-          onPress={this.handleChoosePhoto}
+          onPress={this.onChooseImagePress}
           />
-
+        <Image
+          source={{uri: src}}
+          />
         <View style={styles.buttons}>
           <Button title="Post" onPress={addDealHandler} />
           <Button title="Cancel" color="red" onPress={cancelButtonHandler} />
         </View>
-
       </View>
     </Modal>
   );
