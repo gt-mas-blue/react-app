@@ -42,6 +42,10 @@ export default class ProfileScreen extends Component {
 }
 ProfileScreen.navigationOptions = {
   title: 'Profile',
+  headerStyle: {
+    backgroundColor: '#FF0000'
+  },
+  headerTintColor: '#fff'
 };
 
 

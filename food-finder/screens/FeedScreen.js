@@ -81,6 +81,10 @@ export default function FeedScreen() {
 
 FeedScreen.navigationOptions = {
   title: 'Feed',
+  headerStyle: {
+    backgroundColor: '#FF0000'
+  },
+  headerTintColor: '#fff'
 };
 
 const styles = StyleSheet.create({

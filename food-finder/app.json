@@ -8,9 +8,9 @@
     "ios": {
       "bundleIdentifier": "com.team-blue.food-finder"
     },
-
-    "platforms": ["ios"],
-    "version": "1.0.0",
+    "platforms": [
+      "ios"
+    ],
     "orientation": "portrait",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -23,6 +23,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-
+    "description": ""
   }
 }

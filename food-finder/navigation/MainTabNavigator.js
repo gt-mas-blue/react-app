@@ -72,6 +72,7 @@ const tabNavigator = createBottomTabNavigator({
   FeedStack,
   ProfileStack,
   SettingsStack,
+  
 });
 
 tabNavigator.path = '';
