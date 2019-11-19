@@ -20,13 +20,6 @@ export default class SettingsScreen extends React.Component{
       <View style={{backgroundColor:'gray',flex:1}}>
         <View style={{flex:1, marginTop:50}}>
           <SettingsList>
-            <SettingsList.Header headerText='First Grouping' headerStyle={{color:'white'}}/>
-            <SettingsList.Item
-              hasNavArrow={false}
-              switchState={this.state.switchValue}
-              switchOnValueChange={this.onValueChange}
-              hasSwitch={true}
-              title='Switch Example'/>
             <SettingsList.Header headerText='Login Information' headerStyle={{color:'white', marginTop:50}}/>
             <SettingsList.Item titleInfo='Some Information' hasNavArrow={false} title='Username'/>
             <SettingsList.Item titleInfo='Some Information' hasNavArrow={false} title='Password'/>
