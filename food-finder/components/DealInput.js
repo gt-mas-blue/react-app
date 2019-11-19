@@ -21,6 +21,7 @@ const DealInput = props => {
     description: "",
     author: "Nish",
     img: "../assets/images/cardImage2.png",
+    obj_num: null
   };
 
   const [enteredDeal, setEnteredDeal] = useState(dict);
@@ -31,6 +32,7 @@ const DealInput = props => {
       description: enteredDeal.description,
       author: enteredDeal.author,
       img: enteredDeal.img,
+      obj_num: null
       };
     setEnteredDeal(newDict);
   };
@@ -41,6 +43,7 @@ const DealInput = props => {
       description: enteredText,
       author: enteredDeal.author,
       img: enteredDeal.img,
+      obj_num: null
       };
     setEnteredDeal(newDict);
   };
@@ -60,14 +63,10 @@ const DealInput = props => {
       title: enteredDeal.title,
       description: enteredDeal.description,
       author: enteredDeal.author,
-      img: result.uri,
+      img: result.base64,
+      obj_num: null
       };
-
-
-    ret = axios.post("https://foodfinderapi.herokuapp.com/Images/", result.uri);
-
-    console.log(ret);
-
+    ret = axios.post("https://foodfinderapi.herokuapp.com/Images/", {filepath: result.uri});
 
     if (!result.cancelled) {
       Alert.alert("Success");
@@ -82,13 +81,14 @@ const DealInput = props => {
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
     // this should be able to work
-    // axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
-    //   username: AsyncStorage.getItem('username'),
-    //   postTitle: enteredDeal.title,
-    //   description: enteredDeal.description,
-    //   likes: 0,
-    //   imgPointer: enteredDeal.img
-    // })
+    axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
+      username: AsyncStorage.getItem('username'),
+      postTitle: enteredDeal.title,
+      description: enteredDeal.description,
+      likes: 0,
+      imgPointer: enteredDeal.img
+    }).then(function (response) {console.log(response);});
+    console.log(enteredDeal);
     setEnteredDeal(dict);
   };
 
@@ -100,6 +100,18 @@ const DealInput = props => {
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
+        <Image
+          style={{width: 50, height: 50}}
+          source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+        />
+        <Button
+          title="Choose Photo"
+          onPress={this.onChooseImagePress}
+        />
+        <Image
+          style={{width: 50, height: 50}}
+          source={{uri: enteredDeal.img}}
+        />
         <TextInput
           placeholder="Title"
           placeholderTextColor = "#000"
@@ -114,13 +126,6 @@ const DealInput = props => {
           onChangeText={dealInputHandler}
           value={enteredDeal.description}
         />
-        <Button
-          title="Choose Photo"
-          onPress={this.onChooseImagePress}
-          />
-        <Image
-          source={{uri: src}}
-          />
         <View style={styles.buttons}>
           <Button title="Post" onPress={addDealHandler} />
           <Button title="Cancel" color="red" onPress={cancelButtonHandler} />
