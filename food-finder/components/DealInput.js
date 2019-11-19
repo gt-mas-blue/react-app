@@ -33,7 +33,6 @@ const DealInput = props => {
       img: enteredDeal.img,
       };
     setEnteredDeal(newDict);
-    console.log(enteredDeal);
   };
 
   const dealInputHandler = (enteredText) => {
@@ -44,45 +43,52 @@ const DealInput = props => {
       img: enteredDeal.img,
       };
     setEnteredDeal(newDict);
-    console.log(enteredDeal);
   };
 
    onChooseImagePress = async () => {
     Permissions.askAsync(Permissions.CAMERA)
     Permissions.askAsync(Permissions.CAMERA_ROLL)
-    let result = await ImagePicker.launchCameraAsync(base64);
-    // let result = await ImagePicker.launchImageLibraryAsync();
+    let result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      base64: true,
+      exif: true,
+
+    })
+    //
     // todo: Upload the image, passback the mongoID, store mongoID in field img:
-    ret = axios.post("https://foodfinderapi.herokuapp.com/Images/", {
-      data: result.base64,
-      contentType: "jpeg"
-    });
     var newDict = {
       title: enteredDeal.title,
       description: enteredDeal.description,
       author: enteredDeal.author,
-      img: ret.imgid,
+      img: result.uri,
       };
-    setEnteredDeal(newDict);
+
+
+    ret = axios.post("https://foodfinderapi.herokuapp.com/Images/", result.uri);
+
+    console.log(ret);
+
+
     if (!result.cancelled) {
       Alert.alert("Success");
 
     } else {
       Alert.alert("Error!")
     }
-  } 
+
+    setEnteredDeal(newDict);
+  }
 
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
-    console.log(enteredDeal);
     // this should be able to work
-    axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
-      username: AsyncStorage.getItem('username'),
-      postTitle: enteredDeal.title,
-      description: enteredDeal.description,
-      likes: 0,
-      imgPointer: enteredDeal.img
-    })
+    // axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
+    //   username: AsyncStorage.getItem('username'),
+    //   postTitle: enteredDeal.title,
+    //   description: enteredDeal.description,
+    //   likes: 0,
+    //   imgPointer: enteredDeal.img
+    // })
     setEnteredDeal(dict);
   };
 
