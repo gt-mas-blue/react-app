@@ -87,13 +87,7 @@ export default class FeedScreen extends React.Component {
     )}
 }
 
-navigationOptions = {
-  title: 'Feed',
-  headerStyle: {
-    backgroundColor: '#FF0000'
-  },
-  headerTintColor: '#fff'
-};
+
 
 const styles = StyleSheet.create({
   screen: {
@@ -125,3 +119,10 @@ const styles = StyleSheet.create({
     paddingTop: 15
   }
 });
+navigationOptions = {
+  title: 'Feed',
+  headerStyle: {
+    backgroundColor: '#FF0000'
+  },
+  headerTintColor: '#fff'
+};
