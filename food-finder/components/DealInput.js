@@ -82,13 +82,12 @@ const DealInput = props => {
 
     setEnteredDeal(newDict);
   }
-
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
-
-    // Create Post
-    axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
-      username: 'usernmame',
+    AsyncStorage.getItem('username').then((value) => {
+      if (value) {
+        axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
+      username: value,
       postTitle: enteredDeal.title,
       description: enteredDeal.description,
       likes: 0,
@@ -96,6 +95,10 @@ const DealInput = props => {
     }).then(res => {console.log(res);}).catch(error => {console.log(["Create Post Error", error]);});
     console.log(enteredDeal);
     setEnteredDeal(dict);
+      }
+    });
+    // Create Post
+
   };
 
   const cancelButtonHandler = () => {
