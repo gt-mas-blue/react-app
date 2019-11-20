@@ -11,7 +11,8 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-import axios from 'axios'
+import axios from 'axios';
+import $ from 'jquery';
 
 const DealInput = props => {
   src = "../assets/images/cardImage2.png";
@@ -63,12 +64,9 @@ const DealInput = props => {
     }
 
     // Post Image
-    var bodyFormData = new FormData();
-    bodyFormData.append('image', result.uri);
-    console.log(bodyFormData);
-    var obj = {image: result.uri};
-    console.log(obj);
-    axios.post('https://foodfinderapi.herokuapp.com/Images/', obj, {
+    var form = new FormData();
+    form.append("image", result.uri);
+    axios.post('https://foodfinderapi.herokuapp.com/Images/', form, {
       headers: { 'content-type': 'multipart/form-data'}
     }).then(res => {console.log(res)}).catch(error => {console.log(['image error', error])});
 
