@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Button, RefreshControl } from 'react-native';
 import FeedView from '../components/Feed';
 import DealInput from '../components/DealInput';
 import { AsyncStorage } from 'react-native';
@@ -10,11 +10,31 @@ export default class FeedScreen extends React.Component {
     super();
     this.state = {
       posts: [],
+      refreshing: false,
       isLoading: true,
       error_msg: "",
       isAddMode: false,
       setIsAddMode: false
     };
+  }
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    var self = this;
+    axios.get("https://foodfinderapi.herokuapp.com/Posts/yes").then(res => {
+      self.setState({
+        isLoading: false
+      });
+      if(res.data) {
+        self.setState({
+          posts: res.data.reverse()
+        })
+      } else {
+        self.setState({
+          error_msg: "Login error"
+        })
+      }
+    })
+      this.setState({refreshing: false});
   }
 
   componentWillMount() {
@@ -28,7 +48,7 @@ export default class FeedScreen extends React.Component {
       });
       if(res.data) {
         self.setState({
-          posts: res.data
+          posts: res.data.reverse()
         })
       } else {
         self.setState({
@@ -71,14 +91,19 @@ export default class FeedScreen extends React.Component {
         onCancel={this.cancelButtonHandler}
       />
         <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+              style={styles.container}
+              contentContainerStyle={styles.contentContainer}
+            />
+          }
         >
           <FeedView
             posts={this.state.posts}
             props={this.props}
           />
-
         </ScrollView>
 
         <Button title="New Post" onPress={this.addDeal} />

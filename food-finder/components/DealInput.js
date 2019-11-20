@@ -55,39 +55,45 @@ const DealInput = props => {
       allowsEditing: true,
       base64: true,
       exif: true,
-
     })
-    //
-    // todo: Upload the image, passback the mongoID, store mongoID in field img:
+    if (!result.cancelled) {
+      Alert.alert("Success");
+    } else {
+      Alert.alert("Error!");
+    }
+
+    // Post Image
+    var bodyFormData = new FormData();
+    bodyFormData.append('image', result.uri);
+    console.log(bodyFormData);
+    var obj = {image: result.uri};
+    console.log(obj);
+    axios.post('https://foodfinderapi.herokuapp.com/Images/', obj, {
+      headers: { 'content-type': 'multipart/form-data'}
+    }).then(res => {console.log(res)}).catch(error => {console.log(['image error', error])});
+
     var newDict = {
       title: enteredDeal.title,
       description: enteredDeal.description,
       author: enteredDeal.author,
-      img: result.base64,
-      obj_num: null
+      img: result.uri,
+      obj_num: 10// set this to the image object number returned from Post Image
       };
-    ret = axios.post("https://foodfinderapi.herokuapp.com/Images/", {filepath: result.uri});
-
-    if (!result.cancelled) {
-      Alert.alert("Success");
-
-    } else {
-      Alert.alert("Error!")
-    }
 
     setEnteredDeal(newDict);
   }
 
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
-    // this should be able to work
+
+    // Create Post
     axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
-      username: AsyncStorage.getItem('username'),
+      username: 'usernmame',
       postTitle: enteredDeal.title,
       description: enteredDeal.description,
       likes: 0,
-      imgPointer: enteredDeal.img
-    }).then(function (response) {console.log(response);});
+      imgPointer: "5dd36fd496907d210a03e9c0"
+    }).then(res => {console.log(res);}).catch(error => {console.log(["Create Post Error", error]);});
     console.log(enteredDeal);
     setEnteredDeal(dict);
   };
@@ -100,17 +106,21 @@ const DealInput = props => {
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
+        {enteredDeal.img == "../assets/images/cardImage2.png" &&
         <Image
           style={{width: 50, height: 50}}
           source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+          />
+        }
+        {enteredDeal.img != "../assets/images/cardImage2.png" &&
+        <Image
+          style={{width: 150, height: 150}}
+          source={{uri: enteredDeal.img}}
         />
+        }
         <Button
           title="Choose Photo"
           onPress={this.onChooseImagePress}
-        />
-        <Image
-          style={{width: 50, height: 50}}
-          source={{uri: enteredDeal.img}}
         />
         <TextInput
           placeholder="Title"
