@@ -30,7 +30,8 @@ FeedStack.navigationOptions = {
     />
   ),
   tabBarOptions: {
-    activeTintColor: 'white',
+    activeTintColor: 'black',
+    inactiveTintColor: 'white',
     style: {
       backgroundColor: 'red',
     },
@@ -55,7 +56,8 @@ ProfileStack.navigationOptions = {
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-contact' : 'md-contact'} />
   ),
   tabBarOptions: {
-    activeTintColor: 'white',
+    activeTintColor: 'black',
+    inactiveTintColor: 'white',
     style: {
       backgroundColor: 'red',
     },
@@ -77,7 +79,8 @@ SettingsStack.navigationOptions = {
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
   tabBarOptions: {
-    activeTintColor: 'white',
+    activeTintColor: 'black',
+    inactiveTintColor: 'white',
     style: {
       backgroundColor: 'red',
     },
