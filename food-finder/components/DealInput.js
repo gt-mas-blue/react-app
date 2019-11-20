@@ -63,7 +63,8 @@ const DealInput = props => {
     }
 
     // Post Image
-    axios.post("https://foodfinderapi.herokuapp.com/Images/", {filepath: result.uri});
+    axios.post("https://foodfinderapi.herokuapp.com/Images/", {filepath: result.uri})
+    .then(res => {console.log(res);}).catch(error => {console.log(["Create Image Error", error])});
 
     var newDict = {
       title: enteredDeal.title,
@@ -81,13 +82,13 @@ const DealInput = props => {
 
     // Create Post
     axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
-      "username": AsyncStorage.getItem('username'),
-      "postTitle": enteredDeal.title,
-      "description": enteredDeal.description,
-      "likes": 0,
-      "imgPointer": enteredDeal.obj_num
-    }).then(res => {console.log(res)});
-
+      username: AsyncStorage.getItem('username'),
+      postTitle: enteredDeal.title,
+      description: enteredDeal.description,
+      likes: 0,
+      imgPointer: enteredDeal.obj_num
+    }).then(res => {console.log(res);}).catch(error => {console.log(["Create Post Error", error]);});
+    console.log(enteredDeal);
     setEnteredDeal(dict);
   };
 
