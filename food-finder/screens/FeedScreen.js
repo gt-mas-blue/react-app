@@ -15,7 +15,8 @@ export default class FeedScreen extends React.Component {
       isLoading: true,
       error_msg: "",
       isAddMode: false,
-      setIsAddMode: false
+      setIsAddMode: false,
+      image: []
     };
   }
   _onRefresh = () => {
@@ -37,27 +38,52 @@ export default class FeedScreen extends React.Component {
     })
       this.setState({refreshing: false});
   }
-
-  componentWillMount() {
-    this.setState({
-      isLoading: true
-    });
-    var self = this;
-    axios.get("https://foodfinderapi.herokuapp.com/Posts/yes").then(res => {
-      self.setState({
-        isLoading: false
+    componentWillMount() {
+      this.setState({
+        isLoading: true
       });
-      if(res.data) {
+      var self = this;
+      axios.get("https://foodfinderapi.herokuapp.com/Posts/yes").then(res => {
         self.setState({
-          posts: res.data.reverse()
-        })
-      } else {
-        self.setState({
-          error_msg: "Login error"
-        })
+          isLoading: false
+        });
+        if(res.data) {
+          self.setState({
+            posts: res.data.reverse()
+          })
+          // this.getImages();
+        } else {
+          self.setState({
+            error_msg: "Login error"
+          })
+        }
+      })
+    }
+    getImages = () => {
+      this.setState({isLoading: true});
+      var promiseArray = [];
+      for (var i = 0; i < this.state.posts.length; i++) {
+        promiseArray.push(this.addImage(this.state.posts[i]));
       }
+      Promise.all(promiseArray).then(function(values){
+        this.setState({image: values})
+        this.setState({isLoading: false});
+      }).catch(err => {
+        console.log(err);
     })
   }
+    addImage = (post) => {
+      return new Promise((resolve, reject) => {
+        axios.get("http://foodfinderapi.herokuapp.com/Images/" + post.imgPointer, {headers: {'Content-Type':'image/png'}}).then(res => {
+          if (res.data) {
+            console.log(res.data);
+            resolve(res.data);
+          } else {
+            reject("Error");
+          }
+        })
+      }) 
+    }
   addDeal = () => {
     this.setState({
       isAddMode: true

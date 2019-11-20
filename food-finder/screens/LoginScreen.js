@@ -17,12 +17,10 @@ export default class LoginScreen extends React.Component {
   }
 
   componentWillMount() {
-    AsyncStorage.getItem('credentials').then((value) => {
+    AsyncStorage.getItem('username').then((value) => {
       if (value) {
-        let credentials = JSON.parse(value);
         this.setState({
-          username: credentials.username,
-          password: credentials.password
+          username: value
         });
       }
     });

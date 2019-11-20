@@ -1,23 +1,70 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
 import { AsyncStorage } from 'react-native';
+import ImageBuffer from '../components/ImageBuffer';
+import axios from 'axios';
 
 export default class ProfileScreen extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      isLoading: false,
+      name: "",
+      image: "",
+      info: "",
+      description: "",
+      error_msg: ""
+    };
+  }
+  componentWillMount() {
+    this.setState({
+      isLoading: true
+    });
+    var self = this;
+    AsyncStorage.getItem('username').then((value) => {
+      axios.get("http://foodfinderapi.herokuapp.com/UserData/" + value).then(res => {
+        console.log(res.data);
+        self.setState({
+          isLoading: false
+        });
+        if(res.data) {
+          self.setState({
+            name: res.data[0].firstName + " " + res.data[0].lastName,
+            info: res.data[0].job,
+            description: res.data[0].bio,
+            image: res.data[0].username
+          })
+        } else {
+          self.setState({
+            error_msg: "Login error"
+          })
+        }
+        this.setState({isLoading: false});
+      })
+    })
+
+  }
   logout() {
     AsyncStorage.removeItem('username').then((value) => {
       this.props.navigation.navigate('Auth')
     })
   }
+
   render() {
+    if(this.state.isLoading){
+      return(<View/>);
+    }
     return (
       <ScrollView style={styles.container}>
           <View style={styles.header}></View>
-          <Image style={styles.avatar} source={require('../assets/images/sample-guy.png')}/>
+          <ImageBuffer 
+              props = {this.props}
+              app = {this.state.image}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>Nishant Sethunath</Text>
-              <Text style={styles.info}>Avid Cook / Healthy Vegan</Text>
-              <Text style={styles.description}>I am a Georgia Tech student and love computer science. I am a mobile app developer and I love cooking cheap, healthy food in my free time. </Text>
+              <Text style={styles.name}>{this.state.name}</Text>
+              <Text style={styles.info}>{this.state.info}</Text>
+              <Text style={styles.description}>{this.state.description}</Text>
 
               <TouchableOpacity style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>Posts</Text>
@@ -42,10 +89,6 @@ export default class ProfileScreen extends Component {
 }
 ProfileScreen.navigationOptions = {
   title: 'Profile',
-  headerStyle: {
-    backgroundColor: '#FF0000'
-  },
-  headerTintColor: '#fff'
 };
 
 

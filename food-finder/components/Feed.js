@@ -26,7 +26,7 @@ export const PostItem = ({ post, props }) => {
           {post.description == '' && <Text style={styles.subtitleStyle}>Description:</Text>}
           <Text style={styles.subtitleStyle}>{post.description}</Text>
         </View>
-        {post.title != "Atwoods" && post.title != "Moe Monday" &&
+        {/* {post.title != "Atwoods" && post.title != "Moe Monday" &&
           <Image
             source={require("../assets/images/cardImage2.png")}
             style={styles.cardItemImagePlace}
@@ -43,7 +43,7 @@ export const PostItem = ({ post, props }) => {
             source={require("../assets/images/burrito.jpg")}
             style={styles.cardItemImagePlace}
           />
-        }
+        } */}
       </View>
       <View style={styles.actionBody}>
         <View style={styles.buttonGroup}>
