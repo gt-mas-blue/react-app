@@ -19,6 +19,7 @@ export default class FeedScreen extends React.Component {
   }
   _onRefresh = () => {
     this.setState({refreshing: true});
+    var self = this;
     axios.get("https://foodfinderapi.herokuapp.com/Posts/yes").then(res => {
       self.setState({
         isLoading: false
