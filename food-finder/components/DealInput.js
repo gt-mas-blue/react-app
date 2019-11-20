@@ -52,7 +52,7 @@ const DealInput = props => {
    onChooseImagePress = async () => {
     Permissions.askAsync(Permissions.CAMERA)
     Permissions.askAsync(Permissions.CAMERA_ROLL)
-    let result = await ImagePicker.launchCameraAsync({
+    let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       base64: true,
       exif: true,
@@ -65,7 +65,9 @@ const DealInput = props => {
 
     // Post Image
     var form = new FormData();
-    form.append("image", result.uri);
+    data2 = result.uri.slice(7);
+    form.append("image", {uri: data2});
+    console.log(form);
     axios.post('https://foodfinderapi.herokuapp.com/Images/', form, {
       headers: { 'content-type': 'multipart/form-data'}
     }).then(res => {console.log(res)}).catch(error => {console.log(['image error', error])});
