@@ -30,6 +30,15 @@ const DealInput = props => {
     dietaryRestrictions: [0,0,0],
     colors:['powderblue', 'lavenderblush']
   };
+  const boxes = {
+    b1: false,
+    b2: false,
+    b3: false,
+    b4: false,
+    b5: false,
+    b6: false,
+  }
+  const [eboxes, setboxes] = useState(boxes);
 
   const [enteredDeal, setEnteredDeal] = useState(dict);
 
@@ -189,19 +198,60 @@ const DealInput = props => {
             size={10}
             checkedIcon='dot-circle-o'
             uncheckedIcon='circle-o'
-
+            checked={eboxes.b1}
+            onPress={function ()
+              {
+                var brandNew = {
+                  b1: !eboxes.b1,
+                  b2: eboxes.b2,
+                  b3: eboxes.b3,
+                  b4: eboxes.b4,
+                  b5: eboxes.b5,
+                  b6: eboxes.b6,
+                };
+                setboxes(brandNew);
+              }
+            }
             />
             <CheckBox
               title='Vegetarian'
               size={10}
               checkedIcon='dot-circle-o'
               uncheckedIcon='circle-o'
+              checked={eboxes.b2}
+              onPress={function ()
+                {
+                  var brandNew = {
+                    b1: eboxes.b1,
+                    b2: !eboxes.b2,
+                    b3: eboxes.b3,
+                    b4: eboxes.b4,
+                    b5: eboxes.b5,
+                    b6: eboxes.b6,
+                  };
+                  setboxes(brandNew);
+                }
+              }
               />
             <CheckBox
               size={10}
               title='Gluten Free'
               checkedIcon='dot-circle-o'
               uncheckedIcon='circle-o'
+              checked={eboxes.b3}
+              onPress={function ()
+                {
+                  var brandNew = {
+                    b1: eboxes.b1,
+                    b2: eboxes.b2,
+                    b3: !eboxes.b3,
+                    b4: eboxes.b4,
+                    b5: eboxes.b5,
+                    b6: eboxes.b6,
+                  };
+                  setboxes(brandNew);
+                }
+              }
               />
         </View>
         <View>
@@ -216,6 +266,20 @@ const DealInput = props => {
             title='Keto'
             checkedIcon='dot-circle-o'
             uncheckedIcon='circle-o'
+            checked={eboxes.b4}
+            onPress={function ()
+              {
+                var brandNew = {
+                  b1: eboxes.b1,
+                  b2: eboxes.b2,
+                  b3: eboxes.b3,
+                  b4: !eboxes.b4,
+                  b5: eboxes.b5,
+                  b6: eboxes.b6,
+                };
+                setboxes(brandNew);
+              }
+            }
             />
 
             <CheckBox
@@ -223,12 +287,40 @@ const DealInput = props => {
               title='Low Sodium'
               checkedIcon='dot-circle-o'
               uncheckedIcon='circle-o'
+              checked={eboxes.b5}
+              onPress={function ()
+                {
+                  var brandNew = {
+                    b1: eboxes.b1,
+                    b2: eboxes.b2,
+                    b3: eboxes.b3,
+                    b4: eboxes.b4,
+                    b5: !eboxes.b5,
+                    b6: eboxes.b6,
+                  };
+                  setboxes(brandNew);
+                }
+              }
               />
           <CheckBox
             size={10}
             title='Superfruits'
             checkedIcon='dot-circle-o'
             uncheckedIcon='circle-o'
+            checked={eboxes.b6}
+            onPress={function ()
+              {
+                var brandNew = {
+                  b1: eboxes.b1,
+                  b2: eboxes.b2,
+                  b3: eboxes.b3,
+                  b4: eboxes.b4,
+                  b5: eboxes.b5,
+                  b6: !eboxes.b6,
+                };
+                setboxes(brandNew);
+              }
+            }
             />
         </View>
 
