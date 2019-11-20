@@ -61,8 +61,8 @@ export default class SettingsScreen extends React.Component{
       <View style={{backgroundColor:'white',flex:1}}>
         <View style={{flex:1}}>
           <SettingsList>
-            <SettingsList.Header headerText='User Information' headerStyle={{color:'black', alignSelf: "center",fontSize: 20}}/>
-            <SettingsList.Item titleInfo={this.state.username} titleStyle={{color:'black'}} hasNavArrow={false} title='Username'/>
+            <SettingsList.Header headerText='User Information' headerStyle={{color:'#000', alignSelf: "center",fontSize: 20}}/>
+            <SettingsList.Item titleInfo={this.state.username} titleStyle={{color:'#000'}} hasNavArrow={false} title='Username'/>
             <SettingsList.Item titleInfo={this.state.email} hasNavArrow={false} title='Email'/>
             <SettingsList.Item titleInfo={this.state.firstName} hasNavArrow={false} title='First Name'/>
             <SettingsList.Item titleInfo={this.state.lastName} hasNavArrow={false} title='Last Name'/>
