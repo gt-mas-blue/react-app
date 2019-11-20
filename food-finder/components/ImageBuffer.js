@@ -11,10 +11,12 @@ export default ImageBuffer = ({ app, props }) => {
     return <Image source={require("../assets/images/shashank.png")} style={styles.avatar}/>
   } else if (app == "shopaniuk") {
     return <Image source={require("../assets/images/sho.png")} style={styles.avatar}/>
-  } else if (app == "moe") {
+  } else if (app.includes("Moe") || app.includes("moe")) {
     return <Image source={require("../assets/images/burrito.jpg")} style={styles.cardItemImagePlace}/>
-  } else if (app == "pizza") {
+  } else if (app.includes("Pizza") || app.includes("pizza")) {
     return <Image source={require("../assets/images/pizza.png")} style={styles.cardItemImagePlace}/>
+  } else if (app.includes("Mongolian") || app.includes("mongolian")) {
+    return <Image source={require("../assets/images/mongo.png")} style={styles.cardItemImagePlace}/>
   } else {
     return <Image source={require("../assets/images/cardImage2.png")} style={styles.cardItemImagePlace}/>
   }

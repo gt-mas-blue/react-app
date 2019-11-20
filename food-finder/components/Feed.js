@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import ImageBuffer from './ImageBuffer';
 
 export default FeedView = ({ posts, props }) => {
   postList = []
@@ -26,6 +27,7 @@ export const PostItem = ({ post, props }) => {
           {post.description == '' && <Text style={styles.subtitleStyle}>Description:</Text>}
           <Text style={styles.subtitleStyle}>{post.description}</Text>
         </View>
+        <ImageBuffer props = {props} app = {post.postTitle}/>
         {/* {post.title != "Atwoods" && post.title != "Moe Monday" &&
           <Image
             source={require("../assets/images/cardImage2.png")}
@@ -60,7 +62,7 @@ export const PostItem = ({ post, props }) => {
             <Text style={styles.actionText1}>{post.username}</Text>
           </TouchableOpacity>
         </View>
-        <View style={{flexDirection: "row"}}>
+        {/* <View style={{flexDirection: "row"}}>
           <TouchableOpacity
             style={{backgroundColor: 'lavenderblush',
             alignItems: 'center',
@@ -81,7 +83,7 @@ export const PostItem = ({ post, props }) => {
             >
             <Text style={{color: 'blue', justifyContent: 'center', fontSize:15}}>#Vegan</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
       </View>
     </View>
