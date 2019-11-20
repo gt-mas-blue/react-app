@@ -19,8 +19,8 @@ export default ImageBuffer = ({ app, props }) => {
     return <Image source={require("../assets/images/mongo.png")} style={styles.cardItemImagePlace}/>
   } else if (app.includes("Waffle") || app.includes("waffle")) {
     return <Image source={require("../assets/images/wafflehouse.jpg")} style={styles.cardItemImagePlace}/>
-  } else if (app.includes("Curry") || app.includes("curry") || app.includes("sweet") || app.includes("Sweet")) {
-    return <Image source={require("../assets/images/IMG_2856.png")} style={styles.cardItemImagePlace}/>
+  } else if (app.includes("Curry") || app.includes("curry")) {
+    return <Image source={require("../assets/images/curry.png")} style={styles.cardItemImagePlace}/>
   } else {
     return <Image source={require("../assets/images/cardImage2.png")} style={styles.cardItemImagePlace}/>
   }
