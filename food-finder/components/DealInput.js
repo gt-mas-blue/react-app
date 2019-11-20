@@ -81,28 +81,28 @@ const DealInput = props => {
     //   headers: { 'content-type': 'multipart/form-data'}
     // }).then(res => {console.log(res)}).catch(error => {console.log(['image error', error])});
 
-    var data = new FormData();
-    data.append("image", data2);
-    console.log(data);
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-    xhr.addEventListener("readystatechange", function () {
-      if (this.readyState === 4) {
-        console.log(this.responseText);
-      }
-    });
-    xhr.open("POST", "https://foodfinderapi.herokuapp.com/Images/");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("User-Agent", "PostmanRuntime/7.19.0");
-    xhr.setRequestHeader("Accept", "*/*");
-    xhr.setRequestHeader("Cache-Control", "no-cache");
-    xhr.setRequestHeader("Postman-Token", "76cb312b-fb8c-4604-9c52-4cac91f78369,51959064-01f8-4d29-a055-5dd0f6ac0ad9");
-    xhr.setRequestHeader("Host", "foodfinderapi.herokuapp.com");
-    xhr.setRequestHeader("Accept-Encoding", "gzip, deflate");
-    xhr.setRequestHeader("Content-Length", "905");
-    xhr.setRequestHeader("Connection", "keep-alive");
-    xhr.setRequestHeader("cache-control", "no-cache");
-    xhr.send(data);
+    // var data = new FormData();
+    // data.append("image", data2);
+    // console.log(data);
+    // var xhr = new XMLHttpRequest();
+    // xhr.withCredentials = true;
+    // xhr.addEventListener("readystatechange", function () {
+    //   if (this.readyState === 4) {
+    //     console.log(this.responseText);
+    //   }
+    // });
+    // xhr.open("POST", "https://foodfinderapi.herokuapp.com/Images/");
+    // xhr.setRequestHeader("Content-Type", "application/json");
+    // xhr.setRequestHeader("User-Agent", "PostmanRuntime/7.19.0");
+    // xhr.setRequestHeader("Accept", "*/*");
+    // xhr.setRequestHeader("Cache-Control", "no-cache");
+    // xhr.setRequestHeader("Postman-Token", "76cb312b-fb8c-4604-9c52-4cac91f78369,51959064-01f8-4d29-a055-5dd0f6ac0ad9");
+    // xhr.setRequestHeader("Host", "foodfinderapi.herokuapp.com");
+    // xhr.setRequestHeader("Accept-Encoding", "gzip, deflate");
+    // xhr.setRequestHeader("Content-Length", "905");
+    // xhr.setRequestHeader("Connection", "keep-alive");
+    // xhr.setRequestHeader("cache-control", "no-cache");
+    // xhr.send(data);
 
 
 
