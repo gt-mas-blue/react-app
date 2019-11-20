@@ -1,29 +1,73 @@
 import React from 'react';
 import { ExpoConfigView } from '@expo/samples';
 import SettingsList from 'react-native-setting-list';
+import axios from 'axios';
 import { ScrollView, StyleSheet, Text, View, Image, TouchableOpacity, Button} from 'react-native';
 import ReactNativeSettingsPage, { 
 	SectionRow, 
 	NavigateRow,
   CheckRow
 } from 'react-native-settings-page';
+import { AsyncStorage } from 'react-native';
 export default class SettingsScreen extends React.Component{
   
-  constructor(){
+  constructor(props){
     super();
-    this.onValueChange = this.onValueChange.bind(this);
-    this.state = {switchValue: false};
+    this.state = {
+      isLoading: false,
+      username: '',
+      password: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+    };
+  }
+  componentWillMount() {
+    this.setState({isLoading: true})
+    AsyncStorage.getItem('username').then((value) => {
+      if (value) {
+        this.setState({
+          username: value
+        });
+      }
+      var self = this;
+      axios.get("https://foodfinderapi.herokuapp.com/UserData/" + self.state.username + "/").then(res => {
+        if(res.data) {
+            console.log(res.data[0].email)
+            self.setState({
+              email: res.data[0].email,
+              firstName: res.data[0].firstName,
+              lastName: res.data[0].lastName
+            })
+        } else {
+          self.setState({
+            error_msg: "Login error"
+          })
+        }
+      })
+      self.setState({
+        isLoading: false
+      });
+    });
+    console.log(this.state.email);
+
+    
   }
   
   render() {
+    if (this.state.isLoading){
+      return(<View></View>)
+    };
+    // const { username, email} = this.state;
     return (
-      <View style={{backgroundColor:'gray',flex:1}}>
-        <View style={{flex:1, marginTop:50}}>
+      <View style={{backgroundColor:'white',flex:1}}>
+        <View style={{flex:1}}>
           <SettingsList>
-            <SettingsList.Header headerText='Login Information' headerStyle={{color:'white', marginTop:50}}/>
-            <SettingsList.Item titleInfo='Some Information' hasNavArrow={false} title='Username'/>
-            <SettingsList.Item titleInfo='Some Information' hasNavArrow={false} title='Password'/>
-            <SettingsList.Item titleInfo='Some Information' hasNavArrow={false} title='Email'/>
+            <SettingsList.Header headerText='User Information' headerStyle={{color:'black', alignSelf: "center",fontSize: 20}}/>
+            <SettingsList.Item titleInfo={this.state.username} titleStyle={{color:'black'}} hasNavArrow={false} title='Username'/>
+            <SettingsList.Item titleInfo={this.state.email} hasNavArrow={false} title='Email'/>
+            <SettingsList.Item titleInfo={this.state.firstName} hasNavArrow={false} title='First Name'/>
+            <SettingsList.Item titleInfo={this.state.lastName} hasNavArrow={false} title='Last Name'/>
           </SettingsList>
         </View>
       </View>
