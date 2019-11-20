@@ -10,11 +10,30 @@ export default class FeedScreen extends React.Component {
     super();
     this.state = {
       posts: [],
+      refreshing: false,
       isLoading: true,
       error_msg: "",
       isAddMode: false,
       setIsAddMode: false
     };
+  }
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    axios.get("https://foodfinderapi.herokuapp.com/Posts/yes").then(res => {
+      self.setState({
+        isLoading: false
+      });
+      if(res.data) {
+        self.setState({
+          posts: res.data
+        })
+      } else {
+        self.setState({
+          error_msg: "Login error"
+        })
+      }
+    })
+      this.setState({refreshing: false});
   }
 
   componentWillMount() {
@@ -71,14 +90,19 @@ export default class FeedScreen extends React.Component {
         onCancel={this.cancelButtonHandler}
       />
         <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+              style={styles.container}
+              contentContainerStyle={styles.contentContainer}
+            />
+          }
         >
           <FeedView
             posts={this.state.posts}
             props={this.props}
           />
-
         </ScrollView>
 
         <Button title="New Post" onPress={this.addDeal} />
