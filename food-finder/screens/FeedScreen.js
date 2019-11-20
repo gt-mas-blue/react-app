@@ -23,9 +23,6 @@ export default class FeedScreen extends React.Component {
     this.setState({refreshing: true});
     var self = this;
     axios.get("https://foodfinderapi.herokuapp.com/Posts/yes").then(res => {
-      self.setState({
-        isLoading: false
-      });
       if(res.data) {
         self.setState({
           posts: res.data.reverse()
@@ -35,8 +32,9 @@ export default class FeedScreen extends React.Component {
           error_msg: "Login error"
         })
       }
-    })
       this.setState({refreshing: false});
+    })
+
   }
     componentWillMount() {
       this.setState({
