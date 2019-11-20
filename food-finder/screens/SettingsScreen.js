@@ -33,7 +33,6 @@ export default class SettingsScreen extends React.Component{
       var self = this;
       axios.get("https://foodfinderapi.herokuapp.com/UserData/" + self.state.username + "/").then(res => {
         if(res.data) {
-            console.log(res.data[0].email)
             self.setState({
               email: res.data[0].email,
               firstName: res.data[0].firstName,
