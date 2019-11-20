@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     paddingTop: 15
   }
 });
-navigationOptions = {
+FeedScreen.navigationOptions = {
   title: 'Feed',
   headerStyle: {
     backgroundColor: '#FF0000'
