@@ -49,7 +49,6 @@ export default class SettingsScreen extends React.Component{
         isLoading: false
       });
     });
-    console.log(this.state.email);
 
     
   }
