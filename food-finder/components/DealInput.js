@@ -15,6 +15,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import axios from 'axios';
 import $ from 'jquery';
+import { CheckBox } from 'react-native-elements';
 
 const DealInput = props => {
   src = "../assets/images/cardImage2.png";
@@ -182,37 +183,26 @@ const DealInput = props => {
 
         <Text style={{fontSize:20, paddingBottom:10}}>Dietary Restrictions</Text>
 
-        <View style={styles.buttons}>
-          <TouchableOpacity
-            style={{backgroundColor: 'powderblue',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 5,
-            }}
-            >
-            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Vegan</Text>
-          </TouchableOpacity>
-          <Text>     </Text>
-          <TouchableOpacity
-            style={{backgroundColor: 'powderblue',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 5
-            }}
-            >
-            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Vegetarian</Text>
-          </TouchableOpacity>
-          <Text>     </Text>
-          <TouchableOpacity
-            style={{backgroundColor: 'powderblue',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 5,
-            padding: 10
-            }}
-            >
-            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Gluten Free</Text>
-          </TouchableOpacity>
+        <View style={{flexDirection:'column'}}>
+          <CheckBox
+            title='Vegan'
+            size={10}
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+
+            />
+            <CheckBox
+              title='Vegetarian'
+              size={10}
+              checkedIcon='dot-circle-o'
+              uncheckedIcon='circle-o'
+              />
+            <CheckBox
+              size={10}
+              title='Gluten Free'
+              checkedIcon='dot-circle-o'
+              uncheckedIcon='circle-o'
+              />
         </View>
         <View>
           <Text style={{fontSize:25}}> </Text>
@@ -220,38 +210,26 @@ const DealInput = props => {
 
         <Text style={{fontSize:20, paddingBottom:10}}>Health Tags</Text>
 
-        <View style={styles.buttons}>
-          <TouchableOpacity
-            style={{backgroundColor: 'powderblue',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 5,
-            }}
+        <View style={{flexDirection:'column'}}>
+          <CheckBox
+            size={10}
+            title='Keto'
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            />
 
-            >
-            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Keto</Text>
-          </TouchableOpacity>
-          <Text>     </Text>
-          <TouchableOpacity
-            style={{backgroundColor: 'powderblue',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 5
-            }}
-            >
-            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Low Sodium</Text>
-          </TouchableOpacity>
-          <Text>     </Text>
-          <TouchableOpacity
-            style={{backgroundColor: 'powderblue',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 5,
-            padding: 10
-            }}
-            >
-            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Superfruits</Text>
-          </TouchableOpacity>
+            <CheckBox
+              size={10}
+              title='Low Sodium'
+              checkedIcon='dot-circle-o'
+              uncheckedIcon='circle-o'
+              />
+          <CheckBox
+            size={10}
+            title='Superfruits'
+            checkedIcon='dot-circle-o'
+            uncheckedIcon='circle-o'
+            />
         </View>
 
       </View>
