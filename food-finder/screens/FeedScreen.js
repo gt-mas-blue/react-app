@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TextInput, Button, RefreshControl } from 'react-native';
 import FeedView from '../components/Feed';
 import DealInput from '../components/DealInput';
 import { AsyncStorage } from 'react-native';
