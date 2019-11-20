@@ -50,9 +50,6 @@ export const PostItem = ({ post, props }) => {
           <TouchableOpacity style={styles.leftBtn}>
             <MaterialCommunityIconsIcon name="heart" style={styles.icon1} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.centerBtn}>
-            <MaterialCommunityIconsIcon name="book" style={styles.icon2} />
-          </TouchableOpacity>
           <TouchableOpacity style={styles.rightBtn}>
             <MaterialCommunityIconsIcon name="share" style={styles.icon3} />
           </TouchableOpacity>
@@ -61,6 +58,28 @@ export const PostItem = ({ post, props }) => {
           <Text>By: </Text>
           <TouchableOpacity style={styles.actionButton1}>
             <Text style={styles.actionText1}>{post.username}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{flexDirection: "row"}}>
+          <TouchableOpacity
+            style={{backgroundColor: 'lavenderblush',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 5,
+            padding: 0
+            }}
+            >
+            <Text style={{color: 'blue', justifyContent: 'center', fontSize:15}}>#Superfruits</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{backgroundColor: 'lavenderblush',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 5,
+            padding: 5
+            }}
+            >
+            <Text style={{color: 'blue', justifyContent: 'center', fontSize:15}}>#Vegan</Text>
           </TouchableOpacity>
         </View>
 
