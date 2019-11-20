@@ -63,15 +63,28 @@ const DealInput = props => {
     }
 
     // Post Image
-    axios.post("https://foodfinderapi.herokuapp.com/Images/", {filepath: result.uri})
-    .then(res => {console.log(res);}).catch(error => {console.log(["Create Image Error", error])});
+    var bodyFormData = new FormData();
+    bodyFormData.set('image', result.uri);
+    axios({
+    method: 'post',
+    url: 'https://foodfinderapi.herokuapp.com/Posts/',
+    data: bodyFormData,
+    headers: {'Content-Type': 'multipart/form-data' }
+    })
+    .then(function (response) {
+        console.log(response);
+    })
+    .catch(function (response) {
+        //handle error
+        console.log(['create image error', response]);
+    });
 
     var newDict = {
       title: enteredDeal.title,
       description: enteredDeal.description,
       author: enteredDeal.author,
       img: result.uri,
-      obj_num: null // set this to the image object number returned from Post Image
+      obj_num: 10// set this to the image object number returned from Post Image
       };
 
     setEnteredDeal(newDict);
@@ -86,7 +99,7 @@ const DealInput = props => {
       postTitle: enteredDeal.title,
       description: enteredDeal.description,
       likes: 0,
-      imgPointer: enteredDeal.obj_num
+      imgPointer: "5dd36fd496907d210a03e9c0"
     }).then(res => {console.log(res);}).catch(error => {console.log(["Create Post Error", error]);});
     console.log(enteredDeal);
     setEnteredDeal(dict);
