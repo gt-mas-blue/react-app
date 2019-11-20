@@ -59,26 +59,18 @@ const DealInput = props => {
     if (!result.cancelled) {
       Alert.alert("Success");
     } else {
-      Alert.alert("Error!")
+      Alert.alert("Error!");
     }
 
     // Post Image
     var bodyFormData = new FormData();
     bodyFormData.append('image', result.uri);
     console.log(bodyFormData);
-    axios({
-    method: 'post',
-    url: 'https://foodfinderapi.herokuapp.com/Posts/',
-    data: bodyFormData,
-    headers: {'Content-Type': 'multipart/form-data' }
-    })
-    .then(function (response) {
-        console.log(response);
-    })
-    .catch(function (response) {
-        //handle error
-        console.log(['create image error', response]);
-    });
+    var obj = {image: result.uri};
+    console.log(obj);
+    axios.post('https://foodfinderapi.herokuapp.com/Images/', obj, {
+      headers: { 'content-type': 'multipart/form-data'}
+    }).then(res => {console.log(res)}).catch(error => {console.log(['image error', error])});
 
     var newDict = {
       title: enteredDeal.title,
