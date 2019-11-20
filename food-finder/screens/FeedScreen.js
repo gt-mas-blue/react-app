@@ -26,7 +26,7 @@ export default class FeedScreen extends React.Component {
       });
       if(res.data) {
         self.setState({
-          posts: res.data
+          posts: res.data.reverse()
         })
       } else {
         self.setState({
@@ -48,7 +48,7 @@ export default class FeedScreen extends React.Component {
       });
       if(res.data) {
         self.setState({
-          posts: res.data
+          posts: res.data.reverse()
         })
       } else {
         self.setState({
