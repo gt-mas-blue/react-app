@@ -4,6 +4,7 @@ import FeedView from '../components/Feed';
 import DealInput from '../components/DealInput';
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
+import AwesomeButtonCartman from 'react-native-really-awesome-button/src/themes/cartman';
 
 export default class FeedScreen extends React.Component {
   constructor(props) {
@@ -106,7 +107,7 @@ export default class FeedScreen extends React.Component {
           />
         </ScrollView>
 
-        <Button title="New Post" onPress={this.addDeal} />
+        <AwesomeButtonCartman type="secondary" onPress={this.addDeal} style={{alignSelf:"center", marginTop: 5}}>New Post</AwesomeButtonCartman>
 
     </View>
     )}
@@ -142,6 +143,10 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 15
+  },
+  buttonPost: {
+    width: 60,
+    height: 30
   }
 });
 FeedScreen.navigationOptions = {

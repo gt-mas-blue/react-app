@@ -29,6 +29,12 @@ FeedStack.navigationOptions = {
       name={'ios-home'}
     />
   ),
+  tabBarOptions: {
+    activeTintColor: 'white',
+    style: {
+      backgroundColor: 'red',
+    },
+  }
 };
 
 FeedStack.path = '';
@@ -48,6 +54,12 @@ ProfileStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-contact' : 'md-contact'} />
   ),
+  tabBarOptions: {
+    activeTintColor: 'white',
+    style: {
+      backgroundColor: 'red',
+    },
+  }
 };
 
 ProfileStack.path = '';
@@ -64,6 +76,12 @@ SettingsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
+  tabBarOptions: {
+    activeTintColor: 'white',
+    style: {
+      backgroundColor: 'red',
+    },
+  }
 };
 
 SettingsStack.path = '';
