@@ -49,12 +49,16 @@ export const PostItem = ({ post, props }) => {
       </View>
       <View style={styles.actionBody}>
         <View style={styles.buttonGroup}>
+        <View style={{flexDirection:'row'}}>
           <TouchableOpacity style={styles.leftBtn}>
             <MaterialCommunityIconsIcon name="heart" style={styles.icon1} />
           </TouchableOpacity>
+          <Text style={{marginTop:12}}>{post.likes}</Text>
+          </View>
           <TouchableOpacity style={styles.rightBtn}>
             <MaterialCommunityIconsIcon name="share" style={styles.icon3} />
           </TouchableOpacity>
+
         </View>
         <View style={{ flexDirection: "row" }}>
           <Text>By: </Text>
