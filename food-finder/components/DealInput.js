@@ -7,7 +7,9 @@ import {
   StyleSheet,
   Modal,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  Text,
+  TouchableOpacity
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
@@ -22,7 +24,10 @@ const DealInput = props => {
     description: "",
     author: "Nish",
     img: "../assets/images/cardImage2.png",
-    obj_num: null
+    obj_num: null,
+    healthDescriptors: [0, 0, 0],
+    dietaryRestrictions: [0,0,0],
+    colors:['powderblue', 'lavenderblush']
   };
 
   const [enteredDeal, setEnteredDeal] = useState(dict);
@@ -110,6 +115,8 @@ const DealInput = props => {
 
     setEnteredDeal(newDict);
   }
+
+
   const addDealHandler = () => {
     props.onAddDeal(enteredDeal);
     AsyncStorage.getItem('username').then((value) => {
@@ -137,46 +144,130 @@ const DealInput = props => {
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
-        {enteredDeal.img == "../assets/images/cardImage2.png" &&
-        <Image
-          style={{width: 50, height: 50}}
-          source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
-          />
-        }
-        {enteredDeal.img != "../assets/images/cardImage2.png" &&
-        <Image
-          style={{width: 150, height: 150}}
-          source={{uri: enteredDeal.img}}
-        />
-        }
-        <Button
-          title="Choose Photo"
-          onPress={this.onChooseImagePress}
-        />
-        <TextInput
-          placeholder="Title"
-          placeholderTextColor = "#000"
-          style={styles.input}
-          onChangeText={titleHandler}
-          value={enteredDeal.title}
-        />
-        <TextInput
-          placeholder="Description/Deal"
-          placeholderTextColor = "#000"
-          style={styles.input}
-          onChangeText={dealInputHandler}
-          value={enteredDeal.description}
-        />
+        <View style={styles.card}>
+          <View style={styles.content}>
+            <TextInput
+            placeholder="Title"
+            placeholderTextColor = "gray"
+            style={styles.inputTitle}
+            onChangeText={titleHandler}
+            value={enteredDeal.title}
+            />
+          <TextInput
+            placeholder="Description/Deal"
+            placeholderTextColor = "gray"
+            style={styles.inputDesc}
+            onChangeText={dealInputHandler}
+            value={enteredDeal.description}
+            />
+          </View>
+          <View style={styles.imgContainer} >
+            <TouchableOpacity onPress={this.onChooseImagePress}>
+              {enteredDeal.img == "../assets/images/cardImage2.png" &&
+              <Image
+                style={{width: 50, height: 50}}
+                source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+                />
+              }
+              {enteredDeal.img != "../assets/images/cardImage2.png" &&
+              <Image
+                style={{width: 75, height: 75}}
+                source={{uri: enteredDeal.img}}
+              />
+              }
+            </TouchableOpacity>
+          </View>
+        </View>
+      <View style={styles.options}>
+
+        <Text style={{fontSize:20, paddingBottom:10}}>Dietary Restrictions</Text>
+
+        <View style={styles.buttons}>
+          <TouchableOpacity
+            style={{backgroundColor: 'powderblue',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 5,
+            }}
+            >
+            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Vegan</Text>
+          </TouchableOpacity>
+          <Text>     </Text>
+          <TouchableOpacity
+            style={{backgroundColor: 'powderblue',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 5
+            }}
+            >
+            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Vegetarian</Text>
+          </TouchableOpacity>
+          <Text>     </Text>
+          <TouchableOpacity
+            style={{backgroundColor: 'powderblue',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 5,
+            padding: 10
+            }}
+            >
+            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Gluten Free</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <Text style={{fontSize:25}}> </Text>
+        </View>
+
+        <Text style={{fontSize:20, paddingBottom:10}}>Health Tags</Text>
+
+        <View style={styles.buttons}>
+          <TouchableOpacity
+            style={{backgroundColor: 'powderblue',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 5,
+            }}
+
+            >
+            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Keto</Text>
+          </TouchableOpacity>
+          <Text>     </Text>
+          <TouchableOpacity
+            style={{backgroundColor: 'powderblue',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 5
+            }}
+            >
+            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Low Sodium</Text>
+          </TouchableOpacity>
+          <Text>     </Text>
+          <TouchableOpacity
+            style={{backgroundColor: 'powderblue',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 5,
+            padding: 10
+            }}
+            >
+            <Text style={{color: 'black', justifyContent: 'center', fontSize:20}}>Superfruits</Text>
+          </TouchableOpacity>
+        </View>
+
+      </View>
         <View style={styles.buttons}>
           <Button title="Post" onPress={addDealHandler} />
           <Button title="Cancel" color="red" onPress={cancelButtonHandler} />
         </View>
+
       </View>
+
     </Modal>
   );
 };
 
 const styles = StyleSheet.create({
+
   inputContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -184,15 +275,57 @@ const styles = StyleSheet.create({
     borderColor: "#000000",
     borderWidth: 4
   },
-  input: {
-    width: '80%',
-    borderBottomColor: 'black',
+  inputTitle: {
+    width: '100%',
+    borderColor: 'black',
+    borderWidth: 0,
+    paddingBottom: 12,
+    fontSize: 24,
+  },
+  inputDesc: {
+    width: '100%',
+    borderColor: 'gray',
     borderBottomWidth: 1,
-    padding: 10
+    padding: 0,
+    fontSize: 15,
   },
   buttons: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+
+  },
+  card: {
+    width: '90%',
+    flexDirection: 'row',
+    backgroundColor: "lavenderblush",
+    flexWrap: "nowrap",
+    elevation: 3,
+    borderRadius: 5,
+    borderColor: "#FFF",
+    borderWidth: 1,
+    shadowOffset: {
+      height: 2,
+      width: -2,
+    }
+  },
+  content: {
+    color: "#ffb6c1",
+    flex: 1,
+    padding: 16,
+    paddingTop: 24
+  },
+  imgContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  options: {
+    paddingTop: 20,
+    width: '90%',
+    flexDirection: 'column',
+    paddingBottom: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
 
   }
 });
