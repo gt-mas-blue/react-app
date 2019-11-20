@@ -64,7 +64,8 @@ const DealInput = props => {
 
     // Post Image
     var bodyFormData = new FormData();
-    bodyFormData.set('image', result.uri);
+    bodyFormData.append('image', result.uri);
+    console.log(bodyFormData);
     axios({
     method: 'post',
     url: 'https://foodfinderapi.herokuapp.com/Posts/',
@@ -95,7 +96,7 @@ const DealInput = props => {
 
     // Create Post
     axios.post("https://foodfinderapi.herokuapp.com/Posts/", {
-      username: AsyncStorage.getItem('username'),
+      username: 'usernmame',
       postTitle: enteredDeal.title,
       description: enteredDeal.description,
       likes: 0,
