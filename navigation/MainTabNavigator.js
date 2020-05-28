@@ -33,7 +33,7 @@ FeedStack.navigationOptions = {
     activeTintColor: 'black',
     inactiveTintColor: 'white',
     style: {
-      backgroundColor: 'red',
+      backgroundColor: '#b5490b',
     },
   }
 };
@@ -59,7 +59,7 @@ ProfileStack.navigationOptions = {
     activeTintColor: 'black',
     inactiveTintColor: 'white',
     style: {
-      backgroundColor: 'red',
+      backgroundColor: '#b5490b',
     },
   }
 };
@@ -82,7 +82,7 @@ SettingsStack.navigationOptions = {
     activeTintColor: 'black',
     inactiveTintColor: 'white',
     style: {
-      backgroundColor: 'red',
+      backgroundColor: '#b5490b',
     },
   }
 };
@@ -93,7 +93,7 @@ const tabNavigator = createBottomTabNavigator({
   FeedStack,
   ProfileStack,
   SettingsStack,
-  
+
 });
 
 tabNavigator.path = '';

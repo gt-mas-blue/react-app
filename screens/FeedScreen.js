@@ -80,7 +80,7 @@ export default class FeedScreen extends React.Component {
             reject("Error");
           }
         })
-      }) 
+      })
     }
   addDeal = () => {
     this.setState({
@@ -92,7 +92,7 @@ export default class FeedScreen extends React.Component {
       isAddMode: false
     })
   };
-  
+
   cancelButtonHandler = () => {
     this.setState({
       isAddMode: false
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
 FeedScreen.navigationOptions = {
   title: 'Feed',
   headerStyle: {
-    backgroundColor: '#FF0000'
+    backgroundColor: '#b5490b'
   },
   headerTintColor: '#fff'
 };
